@@ -1,0 +1,42 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #007bff, #00c6ff);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
+  padding: 24px;
+  max-width: 720px;
+  width: 100%;
+  margin: 24px auto;
+}
+
+h2 { margin: 0 0 16px; font-weight: 700; }
+
+label { display: grid; gap: 6px; margin: 10px 0; }
+input, select {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 10px 12px;
+  width: 100%;
+}
+
+.help { color: #b42318; font-size: 12px; margin-top: 4px; }
+
+.acciones { display: flex; gap: 12px; justify-content: flex-end; margin-top: 14px; }
+
+.btn { border: 0; border-radius: 10px; padding: 10px 16px; font-weight: 700; color: #fff; cursor: pointer; }
+.btn-green { background: #16a34a; }
+.btn-green:hover { background: #15803d; }
+.btn-blue  { background: #2563eb; }
+.btn-blue:hover { background: #1d4ed8; }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.alert.error { background: #fde2e1; color: #b42318; padding: 10px 12px; border-radius: 8px; margin-bottom: 10px; }

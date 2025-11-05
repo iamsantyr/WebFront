@@ -1,0 +1,136 @@
+<div class="consultar-container">
+  <div class="consultar-card">
+    <div class="consultar-header">
+      <h2>Consultar Empresas</h2>
+
+      <form [formGroup]="searchForm" class="search-form" (submit)="$event.preventDefault()">
+        <div class="search-bar">
+          <input
+            type="text"
+            placeholder="Buscar por nombre o NIT..."
+            formControlName="terminoBusqueda"
+            aria-label="Campo de búsqueda para filtrar empresas por nombre o NIT"
+            (keydown.enter)="onKeyDown($event)"
+          />
+          <button
+            type="button"
+            (click)="toggleFiltro()"
+            (keydown.enter)="toggleFiltro()"
+            [attr.aria-expanded]="mostrarFiltro.toString()"
+            [attr.aria-label]="mostrarFiltro ? 'Ocultar filtros' : 'Mostrar filtros'">
+            {{ mostrarFiltro ? 'Ocultar' : 'Filtros' }}
+          </button>
+        </div>
+
+        <div *ngIf="mostrarFiltro" class="filter-panel" role="region" aria-label="Panel de filtros">
+          <h3>Filtrar empresas</h3>
+
+          <div class="filter-group">
+            <label for="filtroEmail">Email:</label>
+            <input id="filtroEmail" type="email" formControlName="filtroEmail" placeholder="empresa@ejemplo.com" />
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="loading-indicator" *ngIf="loading" role="status" aria-live="polite">
+      <span>Cargando empresas...</span>
+    </div>
+
+    <div class="error-message" *ngIf="errorMessage" role="alert">
+      <span>{{ errorMessage }}</span>
+    </div>
+
+    <div class="crear-wrapper">
+      <button type="button" class="btn btn-success" (click)="irCrear()" aria-label="Crear empresa">Crear</button>
+      <button type="button" class="btn btn-info" (click)="volverHome()" aria-label="Volver al home">Volver</button>
+    </div>
+
+    <div class="empresas-lista" role="main">
+      <div
+        *ngFor="let e of filtrarEmpresas(); trackBy: trackByCompanyId"
+        class="empresa-item"
+        role="article"
+        [attr.aria-label]="'Empresa ' + e.nombre">
+        <div class="empresa-info">
+          <span class="empresa-id">#{{ e.id }}</span>
+          <div class="empresa-detalles">
+            <span><strong>Nombre:</strong> {{ e.nombre }}</span>
+            <span><strong>NIT:</strong> {{ e.nit }}</span>
+            <span><strong>Teléfono:</strong> {{ e.telefono }}</span>
+            <span><strong>Email:</strong> {{ e.email }}</span>
+          </div>
+        </div>
+
+        <div class="acciones-item">
+          <button
+            type="button"
+            class="btn btn-success"
+            (click)="editarEmpresa(e)"
+            [attr.aria-label]="'Editar empresa ' + e.nombre">
+            Editar
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="eliminarEmpresa(e)"
+            [attr.aria-label]="'Eliminar empresa ' + e.nombre">
+            Eliminar
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-info"
+            (click)="abrirModal(e)"
+            (keydown.enter)="onKeyDown($event, e)"
+            [attr.aria-label]="'Ver detalles de la empresa ' + e.nombre">
+            Ver Detalles
+          </button>
+        </div>
+      </div>
+
+      <div
+        *ngIf="!loading && filtrarEmpresas().length === 0"
+        class="no-results"
+        role="status"
+        aria-live="polite">
+        <p>
+          {{
+            mostrarFiltro && (searchForm?.value?.terminoBusqueda || searchForm?.value?.filtroEmail)
+              ? 'No se encontraron empresas con los filtros aplicados'
+              : 'No hay empresas disponibles'
+          }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal-overlay"
+  *ngIf="modalOpen"
+  (click)="cerrarModal()"
+  (keydown.escape)="onKeyDown($event)"
+  tabindex="-1">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>Detalles de la empresa "{{ empresaSeleccionada?.nombre }}"</h3>
+      <button class="close-btn" aria-label="Cerrar" (click)="cerrarModal()" (keydown.enter)="onKeyDown($event)">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <p><strong>ID:</strong> {{ empresaSeleccionada?.id }}</p>
+      <p><strong>Nombre:</strong> {{ empresaSeleccionada?.nombre }}</p>
+      <p><strong>NIT:</strong> {{ empresaSeleccionada?.nit }}</p>
+      <p><strong>Teléfono:</strong> {{ empresaSeleccionada?.telefono }}</p>
+      <p><strong>Email:</strong> {{ empresaSeleccionada?.email }}</p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" (click)="editarSeleccionada()">Editar</button>
+      <button type="button" class="btn btn-danger" (click)="eliminarSeleccionada()">Eliminar</button>
+      <button type="button" class="btn btn-info" (click)="cerrarModal()">Cerrar</button>
+    </div>
+  </div>
+</div>

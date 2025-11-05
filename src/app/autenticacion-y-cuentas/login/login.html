@@ -1,0 +1,30 @@
+<div class="login-container">
+        <div class="login-card">
+          <h2>Iniciar Sesión</h2>
+
+          <div *ngIf="errorMessage" class="alert error">{{ errorMessage }}</div>
+
+          <form [formGroup]="form" (ngSubmit)="login()">
+            <label>
+              Correo:
+              <input formControlName="email" type="email" placeholder="correo@empresa.com">
+              <small class="help" *ngIf="f['email']?.touched && f['email']?.invalid">Correo válido requerido</small>
+            </label>
+
+            <label>
+              Contraseña:
+              <input formControlName="password" type="password" placeholder="Contraseña">
+              <small class="help" *ngIf="f['password']?.touched && f['password']?.invalid">Contraseña requerida</small>
+            </label>
+
+            <label class="checkbox-label">
+              <input formControlName="recordar" type="checkbox">
+              Recordar sesión
+            </label>
+
+            <div class="acciones">
+              <button class="btn btn-blue" type="submit" [disabled]="loading">Ingresar</button>
+            </div>
+          </form>
+        </div>
+      </div>

@@ -1,0 +1,28 @@
+<div class="home-container">
+  <div class="home-card">
+    <div class="header">
+      <h2>Bienvenido, {{ usuario?.nombre }}</h2>
+      <button class="btn btn-red" (click)="cerrarSesion()">Cerrar Sesión</button>
+    </div>
+
+    <div class="info-usuario">
+      <div class="info-item">
+        <strong>Nombre:</strong> {{ usuario?.nombre }}
+      </div>
+      <div class="info-item">
+        <strong>Email:</strong> {{ usuario?.email }}
+      </div>
+      <div class="info-item">
+        <strong>Rol:</strong> {{ usuario?.rol }}
+      </div>
+      <div class="info-item">
+        <strong>Empresa:</strong> {{ usuario?.empresa }}
+      </div>
+    </div>
+
+    <div class="acciones-principales">
+      <button class="btn btn-success" (click)="crearEmpresa()">Crear Empresa</button>
+      <button class="btn btn-info" (click)="verEmpresas()">Ver Empresas</button>
+    </div>
+  </div>
+</div>

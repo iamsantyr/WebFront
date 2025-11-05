@@ -1,0 +1,39 @@
+<div class="form-container">
+          <div class="card">
+            <h2>{{ esEdicion ? 'Editar' : 'Crear' }} Empresa</h2>
+
+            <div *ngIf="errorMessage" class="alert error">{{ errorMessage }}</div>
+
+            <form [formGroup]="form" (ngSubmit)="guardar()">
+
+              <label>
+                Nombre:
+                <input formControlName="nombre" type="text" placeholder="Ej: Empresa XYZ">
+                <small class="help" *ngIf="f['nombre']?.touched && f['nombre']?.invalid">Nombre requerido (mínimo 2 caracteres)</small>
+              </label>
+
+              <label>
+                NIT:
+                <input formControlName="nit" type="text" placeholder="Ej: 900123456-7">
+                <small class="help" *ngIf="f['nit']?.touched && f['nit']?.invalid">NIT requerido</small>
+              </label>
+
+              <label>
+                Teléfono:
+                <input formControlName="telefono" type="text" placeholder="Ej: 3001234567">
+                <small class="help" *ngIf="f['telefono']?.touched && f['telefono']?.invalid">Teléfono requerido</small>
+              </label>
+
+              <label>
+                Email:
+                <input formControlName="email" type="email" placeholder="contacto@empresa.com">
+                <small class="help" *ngIf="f['email']?.touched && f['email']?.invalid">Email válido requerido</small>
+              </label>
+
+              <div class="acciones">
+                <button class="btn btn-green" type="submit" [disabled]="loading">{{ esEdicion ? 'Actualizar' : 'Guardar' }}</button>
+                <button class="btn btn-blue" type="button" (click)="cancelar()">Cancelar</button>
+              </div>
+            </form>
+          </div>
+        </div>
