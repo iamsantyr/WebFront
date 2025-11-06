@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { EmpresaDto } from '../dto/empresaDto';
 
 export interface OrganizationDto {
   id?: number;
@@ -20,20 +21,20 @@ export class OrganizationService {
 
   constructor(private http: HttpClient) {}
 
-  listar(): Observable<OrganizationDto[]> {
-    return this.http.get<OrganizationDto[]>(`${this.baseUrl}/list`);
+  listar(): Observable<EmpresaDto[]> {
+    return this.http.get<EmpresaDto[]>(`${this.baseUrl}/list`);
   }
 
-  obtener(id: number): Observable<OrganizationDto> {
-    return this.http.get<OrganizationDto>(`${this.baseUrl}/get/${id}`);
+  obtener(id: number): Observable<EmpresaDto> {
+    return this.http.get<EmpresaDto>(`${this.baseUrl}/get/${id}`);
   }
 
-  crear(organization: OrganizationDto): Observable<OrganizationDto> {
-    return this.http.post<OrganizationDto>(`${this.baseUrl}/create`, organization);
+  crear(organization: EmpresaDto): Observable<EmpresaDto> {
+    return this.http.post<EmpresaDto>(`${this.baseUrl}/create`, organization);
   }
 
-  actualizar(id: number, organization: OrganizationDto): Observable<OrganizationDto> {
-    return this.http.put<OrganizationDto>(`${this.baseUrl}/update/${id}`, organization);
+  actualizar(id: number, organization: EmpresaDto): Observable<EmpresaDto> {
+    return this.http.put<EmpresaDto>(`${this.baseUrl}/update/${id}`, organization);
   }
 
   eliminar(id: number): Observable<void> {

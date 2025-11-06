@@ -1,15 +1,16 @@
+<!-- registro-empresa.html -->
 <div class="registro-container">
   <div class="registro-card">
     <h2>Registro de empresa</h2>
 
     <form (ngSubmit)="onRegistrarEmpresa()" #empresaForm="ngForm">
       <div class="input-group">
-        <label for="nombreEmpresa">Nombre de la empresa</label>
+        <label for="name">Nombre de la empresa</label>
         <input
           type="text"
-          id="nombreEmpresa"
-          name="nombreEmpresa"
-          [(ngModel)]="nombreEmpresa"
+          id="name"
+          name="name"
+          [(ngModel)]="empresaDto.name"
           required
           placeholder="Ej: Soluciones Tech S.A."
         />
@@ -21,33 +22,21 @@
           type="text"
           id="nit"
           name="nit"
-          [(ngModel)]="nitEmpresa"
+          [(ngModel)]="empresaDto.nit"
           required
           placeholder="Ej: 900123456-7"
         />
       </div>
 
       <div class="input-group">
-        <label for="correo">Correo de contacto</label>
+        <label for="email">Correo de contacto</label>
         <input
           type="email"
-          id="correo"
-          name="correo"
-          [(ngModel)]="correoEmpresa"
+          id="email"
+          name="email"
+          [(ngModel)]="empresaDto.email"
           required
           placeholder="contacto@empresa.com"
-        />
-      </div>
-
-      <div class="input-group">
-        <label for="admin">Usuario administrador inicial</label>
-        <input
-          type="text"
-          id="admin"
-          name="admin"
-          [(ngModel)]="adminEmpresa"
-          required
-          placeholder="Ej: adminEmpresa"
         />
       </div>
 
