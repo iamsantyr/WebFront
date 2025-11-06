@@ -1,0 +1,77 @@
+<div class="consultar-container">
+  <div class="consultar-card">
+    <div class="consultar-header">
+      <h2>Consultar Actividades</h2>
+
+      <form [formGroup]="form" class="search-form" (ngSubmit)="$event.preventDefault()">
+        <div class="search-bar">
+          <input
+            type="text"
+            placeholder="Buscar por id, nombre o descripción..."
+            formControlName="q"
+            (input)="aplicarBusqueda()"
+          />
+
+          <select formControlName="type" (change)="aplicarBusqueda()" aria-label="Filtrar por type">
+            <option value="">Todos los tipos</option>
+            <option value="manual">manual</option>
+            <option value="automática">automática</option>
+            <option value="sistema">sistema</option>
+          </select>
+
+          <button type="button" (click)="irCrear()" class="crear-btn">Crear</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="loading-indicator" *ngIf="loading">Cargando...</div>
+    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+    <div class="lista">
+      <div *ngFor="let a of actividades; trackBy: trackById" class="item">
+        <div class="info">
+          <span class="pid">#{{ a.id }}</span>
+          <div class="det">
+            <span><strong>Nombre:</strong> {{ a.name }}</span>
+            <span><strong>Tipo:</strong> {{ a.type }}</span>
+            <span><strong>Descripción:</strong> {{ a.description }}</span>
+            <span><strong>Posición:</strong> ({{ a.x ?? 0 }}, {{ a.y ?? 0 }})</span>
+          </div>
+        </div>
+        <div class="acciones">
+          <button class="eliminar-btn" (click)="eliminar(a)">Eliminar</button>
+          <button class="ver-btn" (click)="abrirModal(a)">Ver Detalles</button>
+          <button class="editar-btn" (click)="irModificar(a)">Modificar</button>
+        </div>
+      </div>
+
+      <div *ngIf="!loading && actividades.length === 0" class="no-results">
+        No hay actividades para mostrar.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" *ngIf="modalOpen" (click)="cerrarModal()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>Detalles de "{{ seleccionada?.name }}"</h3>
+      <button class="close-btn" (click)="cerrarModal()">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <p><strong>ID:</strong> {{ seleccionada?.id }}</p>
+      <p><strong>Nombre:</strong> {{ seleccionada?.name }}</p>
+      <p><strong>Tipo:</strong> {{ seleccionada?.type }}</p>
+      <p><strong>Descripción:</strong> {{ seleccionada?.description }}</p>
+      <p><strong>Posición:</strong> ({{ seleccionada?.x ?? 0 }}, {{ seleccionada?.y ?? 0 }})</p>
+    </div>
+
+    <div class="modal-footer">
+      <button class="editar-btn" (click)="irModificar(seleccionada!)">Modificar</button>
+      <button class="eliminar-btn" (click)="eliminar(seleccionada!)">Eliminar</button>
+      <button class="cerrar-btn" (click)="cerrarModal()">Cerrar</button>
+    </div>
+  </div>
+</div>

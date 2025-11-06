@@ -1,0 +1,22 @@
+<div class="wrap">
+  <div class="card">
+    <h2>Eliminar Actividad</h2>
+
+    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+    <div *ngIf="loading">Cargando...</div>
+
+    <div *ngFor="let a of actividades" class="item">
+      <div>
+        <div class="pid">#{{ a.id }}</div>
+        <div><strong>{{ a.name }}</strong> — {{ a.type }}</div>
+        <div class="desc">{{ a.description }}</div>
+      </div>
+      <button class="eliminar-btn" (click)="eliminar(a)">Eliminar</button>
+    </div>
+
+    <div class="actions">
+      <button class="cancelar" (click)="volver()">Volver</button>
+    </div>
+  </div>
+</div>
