@@ -14,7 +14,7 @@ export class HomeScreen implements OnInit {
 
   ngOnInit(): void {}
 
-  // ======== NAVEGACIÓN: PROCESOS ========
+  // ======== PROCESOS ========
   navegarCrearProceso() {
     this.router.navigate(['/crear-proceso']);
   }
@@ -27,29 +27,40 @@ export class HomeScreen implements OnInit {
     this.router.navigate(['/editar-proceso']);
   }
 
-  // ======== NAVEGACIÓN: ACTIVIDADES ========
+  // ======== ACTIVIDADES ========
   navegarCrearActividad() {
     this.router.navigate(['/crear-actividad']);
   }
 
-  navegarConsultarActividad() {
-    this.router.navigate(['/consultar-actividad']);
+  navegarMostrarActividades() {
+    this.router.navigate(['/mostrar-actividades']);
   }
 
   navegarModificarActividad() {
     this.router.navigate(['/modificar-actividad']);
   }
 
-  // ======== NAVEGACIÓN: USUARIOS ========
+  // ======== USUARIOS ========
   navegarCrearUsuario() {
     this.router.navigate(['/crear-usuario']);
   }
 
-  navegarRegistrarEmpresa() {
-    this.router.navigate(['/registro-de-empresa']);
+  navegarEditarUsuario(){
+    this.router.navigate(['/modificar-usuario']);
   }
 
-  // ======== NAVEGACIÓN: EMPRESAS / HOME ========
+  navegarMostrarUsuarios(){
+    this.router.navigate(['mostrar-usuario']);
+  }
+  // ======== EMPRESA ========
+  navegarCrearEmpresa() {
+    this.router.navigate(['/registro-de-empresa']);
+  }
+  navegarMostrarEmpresas(){
+    this.router.navigate(['']);
+  }
+
+  // ======== HOME ========
   navegarHome() {
     this.router.navigate(['/home']);
   }

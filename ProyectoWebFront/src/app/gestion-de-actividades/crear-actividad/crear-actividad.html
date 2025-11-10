@@ -1,6 +1,6 @@
 <div class="crear-container">
   <div class="card">
-    <h2>📝 Crear Actividad</h2>
+    <h2>Crear Actividad</h2>
     <p class="subtitle">Completa la información para registrar una nueva actividad dentro de un proceso.</p>
 
     <form [formGroup]="form" (ngSubmit)="guardar()" novalidate>
@@ -60,7 +60,7 @@
       <!-- Botones -->
       <div class="actions">
         <button class="btn guardar-btn" type="submit" [disabled]="loading">
-          {{ loading ? 'Guardando...' : '💾 Guardar' }}
+          {{ loading ? 'Guardando...' : 'Guardar' }}
         </button>
         <button class="btn cancelar-btn" type="button" (click)="cancelar()">Cancelar</button>
       </div>

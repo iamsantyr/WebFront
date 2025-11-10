@@ -1,69 +1,132 @@
-<!-- <div class="editar-proceso-container">
-  <div class="editar-proceso-card">
+<div class="registro-container">
+  <div class="registro-card">
     <h2>Editar proceso</h2>
 
-    <form (ngSubmit)="guardarCambios()" #editarForm="ngForm">
+    <form (ngSubmit)="onActualizarProceso()" #editarForm="ngForm">
+      <!-- Nombre -->
       <div class="input-group">
-        <label for="nombre">Nombre del proceso</label>
+        <label for="name">Nombre del proceso</label>
         <input
           type="text"
-          id="nombre"
-          name="nombre"
-          [(ngModel)]="nombreProceso"
+          id="name"
+          name="name"
+          [(ngModel)]="procesoDto.name"
           required
           placeholder="Ej: Gestión de reservas"
         />
       </div>
 
+      <!-- Descripción -->
       <div class="input-group">
-        <label for="descripcion">Descripción</label>
-        <textarea
-          id="descripcion"
-          name="descripcion"
-          [(ngModel)]="descripcionProceso"
-          rows="3"
+        <label for="description">Descripción</label>
+        <input
+          type="text"
+          id="description"
+          name="description"
+          [(ngModel)]="procesoDto.description"
           required
           placeholder="Actualiza la descripción del proceso"
-        ></textarea>
+        />
       </div>
 
+      <!-- Categoría -->
       <div class="input-group">
-        <label for="categoria">Categoría</label>
+        <label for="category">Categoría</label>
+        <input
+          type="text"
+          id="category"
+          name="category"
+          [(ngModel)]="procesoDto.category"
+          placeholder="Ej: Operativo / Administrativo / Servicio"
+        />
+      </div>
+
+      <!-- Estado -->
+      <div class="input-group">
+        <label for="status">Estado del proceso</label>
         <select
-          id="categoria"
-          name="categoria"
-          [(ngModel)]="categoriaProceso"
+          id="status"
+          name="status"
+          [(ngModel)]="procesoDto.status"
           required
         >
-          <option value="">Seleccione una categoría</option>
-          <option value="operativo">Operativo</option>
-          <option value="administrativo">Administrativo</option>
-          <option value="servicio">Servicio</option>
+          <option [ngValue]="null" disabled>Selecciona un estado</option>
+          <option *ngFor="let s of statuses" [ngValue]="s">{{ s }}</option>
+        </select>
+      </div>
+
+      <!-- Organización -->
+      <div class="input-group">
+        <label for="organizationId">ID de organización</label>
+        <input
+          type="number"
+          id="organizationId"
+          name="organizationId"
+          [(ngModel)]="procesoDto.organizationId"
+          required
+          min="1"
+          placeholder="Ej: 900123456"
+        />
+      </div>
+
+      <!-- ===== ACTIVIDADES, ARCOS Y GATEWAYS ===== -->
+      <div class="input-group">
+        <label for="activityIds">Actividades (IDs)</label>
+        <select
+          multiple
+          id="activityIds"
+          name="activityIds"
+          [(ngModel)]="procesoDto.activityIds"
+          size="5"
+        >
+          <option *ngFor="let a of activitiesCatalogo" [ngValue]="a.id">
+            {{ a.id }} — {{ a.name }}
+          </option>
         </select>
       </div>
 
       <div class="input-group">
-        <label for="estado">Estado del proceso</label>
-        <select id="estado" name="estado" [(ngModel)]="estadoProceso" required>
-          <option value="DRAFT">Borrador</option>
-          <option value="PUBLISHED">Publicado</option>
-          <option value="INACTIVE">Inactivo</option>
+        <label for="archIds">Arcos (IDs)</label>
+        <select
+          multiple
+          id="archIds"
+          name="archIds"
+          [(ngModel)]="procesoDto.archIds"
+          size="5"
+        >
+          <option *ngFor="let ar of archsCatalogo" [ngValue]="ar.id">
+            {{ ar.id }} — ({{ ar.actividadI }} ➜ {{ ar.actividadD }})
+          </option>
         </select>
       </div>
 
+      <div class="input-group">
+        <label for="gatewayIds">Gateways (IDs)</label>
+        <select
+          multiple
+          id="gatewayIds"
+          name="gatewayIds"
+          [(ngModel)]="procesoDto.gatewayIds"
+          size="5"
+        >
+          <option *ngFor="let g of gatewaysCatalogo" [ngValue]="g.id">
+            {{ g.id }} — {{ g.type }}
+          </option>
+        </select>
+      </div>
+
+      <!-- BOTONES -->
       <div class="button-group">
-        <button type="submit" [disabled]="editarForm.invalid || !permisoEdicionProceso">
+        <button type="submit" [disabled]="editarForm.invalid">
           Guardar cambios
         </button>
         <button type="button" (click)="cancelar()">Cancelar</button>
       </div>
 
-      <p *ngIf="!permisoEdicionProceso" class="status-message">
-        No tienes permisos para editar este proceso.
-      </p>
+      <!-- Mensajes -->
       <p *ngIf="mensajeHistorialProceso" class="status-message">
         {{ mensajeHistorialProceso }}
       </p>
     </form>
   </div>
-</div> -->
+</div>

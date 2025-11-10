@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
 import { RegistroUsuario } from './autenticacion-y-cuentas/registro-usuario/registro-usuario';
 import { CrearActividad } from './gestion-de-actividades/crear-actividad/crear-actividad';
-import { RegistroProcesos } from './registro-procesos/registro-procesos';
 import { MostrarActividades } from './gestion-de-actividades/mostrar-actividades/mostrar-actividades';
 import { HomeScreen } from './home-screen/home-screen/home-screen';
 import { ModificarActividad } from './gestion-de-actividades/modificar-actividad/modificar-actividad';
+import { RegistroProcesos } from './gestion-de-procesos/registro-procesos/registro-procesos';
+import { EditarUsuario } from './autenticacion-y-cuentas/editar-usuario/editar-usuario';
+import { MostrarUsuarios } from './autenticacion-y-cuentas/mostrar-usuario/mostrar-usuario';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -22,10 +24,11 @@ export const routes: Routes = [
     { path: 'crear-proceso', component: RegistroProcesos},
     { path: 'mostrar-actividades', component: MostrarActividades},
     { path: 'home', component: HomeScreen},
+    { path: 'modificar-usuario', component: EditarUsuario},
     { path: 'modificar-actividad', component: ModificarActividad},
+    { path: 'mostrar-usuario', component: MostrarUsuarios},
     { path: 'eliminar-actividad', loadComponent: () => import('./gestion-de-actividades/eliminar-actividad/eliminar-actividad').then(m => m.EliminarActividad) },
-    {path: 'consultar-actividad',loadComponent: () => import('./gestion-de-actividades/consultar-actividad/consultar-actividad').then(m => m.ConsultarActividad)},
-    {path: 'crear-actividad',loadComponent: () => import('./gestion-de-actividades/crear-actividad/crear-actividad').then(m => m.CrearActividad)},
+    { path: 'crear-actividad',loadComponent: () => import('./gestion-de-actividades/crear-actividad/crear-actividad').then(m => m.CrearActividad)},
     { path: '**', redirectTo: '' },
 
 ];

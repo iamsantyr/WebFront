@@ -1,9 +1,25 @@
 <div class="editar-container">
   <div class="card">
     <h2>Modificar Actividad</h2>
-    <p class="subtitle">Actualiza la información de una actividad existente dentro de un proceso.</p>
+    <p class="subtitle">
+      Actualiza la información de una actividad existente dentro de un proceso.
+    </p>
 
     <form [formGroup]="form" (ngSubmit)="guardar()" novalidate>
+      <!-- ID de la actividad -->
+      <div class="field">
+        <label for="id">ID de la Actividad</label>
+        <input
+          id="id"
+          type="number"
+          formControlName="id"
+          placeholder="Ej: 1"
+        />
+        <small class="err" *ngIf="c('id').touched && c('id').invalid">
+          Debes ingresar un ID válido para modificar una actividad existente.
+        </small>
+      </div>
+
       <!-- Nombre -->
       <div class="field">
         <label for="name">Nombre de la Actividad</label>
@@ -23,7 +39,9 @@
         <label for="type">Tipo de Actividad</label>
         <select id="type" formControlName="type">
           <option value="" disabled selected>Seleccione un tipo</option>
-          <option *ngFor="let t of tipos" [value]="t">{{ t | titlecase }}</option>
+          <option *ngFor="let t of tipos" [value]="t">
+            {{ t | titlecase }}
+          </option>
         </select>
         <small class="err" *ngIf="c('type').touched && c('type').invalid">
           El tipo es obligatorio.
@@ -54,15 +72,19 @@
         </div>
       </div>
 
-      <!-- Mensaje de error global -->
-      <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+      <!-- Error global -->
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
 
       <!-- Botones -->
       <div class="actions">
         <button class="btn guardar-btn" type="submit" [disabled]="loading">
           {{ loading ? 'Actualizando...' : 'Guardar Cambios' }}
         </button>
-        <button class="btn cancelar-btn" type="button" (click)="cancelar()">Cancelar</button>
+        <button class="btn cancelar-btn" type="button" (click)="cancelar()">
+          Cancelar
+        </button>
       </div>
     </form>
   </div>

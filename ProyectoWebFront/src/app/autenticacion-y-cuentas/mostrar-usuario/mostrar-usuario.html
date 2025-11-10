@@ -1,0 +1,35 @@
+<div class="usuarios-container">
+  <h2 class="title">Lista de Usuarios</h2>
+
+  <button class="btn-refresh" (click)="cargarUsuarios()" [disabled]="loading">
+    {{ loading ? 'Actualizando...' : '🔄 Refrescar' }}
+  </button>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="!loading && usuarios.length === 0" class="empty">
+    No hay usuarios registrados.
+  </div>
+
+  <div *ngIf="loading" class="loading">Cargando usuarios...</div>
+
+  <div class="usuarios-grid" *ngIf="usuarios.length > 0 && !loading">
+    <div class="usuario-card" *ngFor="let user of usuarios">
+      <div class="card-header">
+        <h3>{{ user.name || 'Sin nombre' }}</h3>
+        <span class="badge">ID {{ user.id }}</span>
+      </div>
+
+      <div class="card-body">
+        <p><strong>Email:</strong> {{ user.email || '—' }}</p>
+        <p><strong>Contraseña:</strong> {{ user.password || '—' }}</p>
+        <p><strong>Organización:</strong> {{ user.organizationId ?? '—' }}</p>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-volver" (click)="volver()">← Volver</button>
+</div>
+<p>mostrar-usuario works!</p>

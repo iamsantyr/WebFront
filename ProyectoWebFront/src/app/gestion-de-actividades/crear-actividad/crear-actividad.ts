@@ -50,7 +50,7 @@ export class CrearActividad {
     this.actividades.create(dto).subscribe({
       next: () => {
         this.loading = false;
-        this.router.navigate(['/consultar-actividad']);
+        this.router.navigate(['/mostrar-actividades']);
       },
       error: () => {
         this.loading = false;

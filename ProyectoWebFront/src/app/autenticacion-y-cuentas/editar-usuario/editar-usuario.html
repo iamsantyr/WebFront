@@ -1,0 +1,64 @@
+<div class="registro-container">
+  <div class="registro-card">
+    <h2>Modificar usuario</h2>
+
+    <form (ngSubmit)="onModificarUsuario()" #usuarioForm="ngForm">
+      <div class="input-group">
+        <label for="name">Nombre completo</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          [(ngModel)]="usuarioDto.name"
+          required
+          placeholder="Ej: Juan Pérez"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="email">Correo electrónico</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="usuarioDto.email"
+          required
+          placeholder="usuario@correo.com"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="password">Nueva contraseña (opcional)</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="usuarioDto.password"
+          placeholder="Deja vacío si no deseas cambiarla"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="organizationId">ID de organización</label>
+        <input
+          type="number"
+          id="organizationId"
+          name="organizationId"
+          [(ngModel)]="usuarioDto.organizationId"
+          required
+          min="1"
+          placeholder="Ej: 900123456"
+        />
+      </div>
+
+      <button type="submit" [disabled]="usuarioForm.invalid">
+        Guardar cambios
+      </button>
+
+      <p class="login-text">
+        ¿Deseas volver?
+        <a routerLink="/home">Regresar al inicio</a>
+      </p>
+    </form>
+  </div>
+</div>

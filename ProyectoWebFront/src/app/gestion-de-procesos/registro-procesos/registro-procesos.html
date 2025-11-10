@@ -1,4 +1,3 @@
-<!-- proceso-form.html -->
 <div class="registro-container">
   <div class="registro-card">
     <h2>Registro de proceso</h2>
@@ -39,7 +38,6 @@
         />
       </div>
 
-      <!-- Status como select (llenado desde TS: statuses = ['DRAFT','ACTIVE','PAUSED','COMPLETED']) -->
       <div class="input-group">
         <label for="status">Estado</label>
         <select
@@ -65,10 +63,6 @@
           placeholder="Ej: 900123456"
         />
       </div>
-
-      <!-- ===== LISTAS COMO MULTISELECTS (RECOMENDADO) ===== -->
-
-      <!-- Activities -->
       <div class="input-group">
         <label for="activityIds">Actividades (IDs)</label>
         <select
@@ -77,9 +71,7 @@
           name="activityIds"
           [(ngModel)]="procesoDto.activityIds"
           size="5"
-        >
-          <!-- activitiesCatálogo: {id:number, name:string}[] -->
-          <option
+        >          <option
             *ngFor="let a of activitiesCatalogo"
             [ngValue]="a.id"
           >
@@ -128,63 +120,6 @@
           </option>
         </select>
       </div>
-
-      <!-- ===== ALTERNATIVA: AGREGAR POR ID (RÁPIDO) ===== -->
-      <div class="input-group">
-        <label>Agregar IDs manualmente</label>
-
-        <!-- Activity quick add -->
-        <div class="row-inline">
-          <input
-            type="number"
-            placeholder="ID actividad"
-            [(ngModel)]="quick.activityId"
-            name="quickActivityId"
-          />
-          <button type="button" (click)="agregarId('activity')">Agregar</button>
-        </div>
-        <div class="chips">
-          <span class="chip" *ngFor="let id of procesoDto.activityIds; let i = index">
-            {{ id }}
-            <button type="button" class="chip-x" (click)="quitarId('activity', i)">✕</button>
-          </span>
-        </div>
-
-        <!-- Arch quick add -->
-        <div class="row-inline">
-          <input
-            type="number"
-            placeholder="ID arco"
-            [(ngModel)]="quick.archId"
-            name="quickArchId"
-          />
-          <button type="button" (click)="agregarId('arch')">Agregar</button>
-        </div>
-        <div class="chips">
-          <span class="chip" *ngFor="let id of procesoDto.archIds; let i = index">
-            {{ id }}
-            <button type="button" class="chip-x" (click)="quitarId('arch', i)">✕</button>
-          </span>
-        </div>
-
-        <!-- Gateway quick add -->
-        <div class="row-inline">
-          <input
-            type="number"
-            placeholder="ID gateway"
-            [(ngModel)]="quick.gatewayId"
-            name="quickGatewayId"
-          />
-          <button type="button" (click)="agregarId('gateway')">Agregar</button>
-        </div>
-        <div class="chips">
-          <span class="chip" *ngFor="let id of procesoDto.gatewayIds; let i = index">
-            {{ id }}
-            <button type="button" class="chip-x" (click)="quitarId('gateway', i)">✕</button>
-          </span>
-        </div>
-      </div>
-
       <button type="submit" [disabled]="procesoForm.invalid">
         Guardar proceso
       </button>

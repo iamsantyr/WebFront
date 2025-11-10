@@ -1,4 +1,7 @@
 <div class="home-container">
+  <!-- LOGO en la esquina superior derecha -->
+  <img src="/assets/logo.png" alt="Logo" class="home-logo" />
+
   <header class="home-header">
     <h1>Gestión de Procesos</h1>
     <p>Selecciona una opción para comenzar</p>
@@ -10,9 +13,9 @@
       <h2>Procesos</h2>
       <p>Administra los flujos de trabajo de tu empresa.</p>
       <div class="actions">
-        <button (click)="navegarCrearProceso()">➕ Crear</button>
-        <button (click)="navegarConsultarProceso()">🔍 Consultar</button>
-        <button (click)="navegarEditarProceso()">✏️ Editar</button>
+        <button (click)="navegarCrearProceso()">Crear</button>
+        <button (click)="navegarConsultarProceso()">Consultar</button>
+        <button (click)="navegarEditarProceso()">Editar</button>
       </div>
     </div>
 
@@ -21,9 +24,9 @@
       <h2>Actividades</h2>
       <p>Gestiona las tareas dentro de cada proceso.</p>
       <div class="actions">
-        <button (click)="navegarCrearActividad()">➕ Crear</button>
-        <button (click)="navegarConsultarActividad()">🔍 Consultar</button>
-        <button (click)="navegarModificarActividad()">✏️ Editar</button>
+        <button (click)="navegarCrearActividad()">Crear</button>
+        <button (click)="navegarMostrarActividades()">Consultar</button>
+        <button (click)="navegarModificarActividad()">Editar</button>
       </div>
     </div>
 
@@ -32,8 +35,9 @@
       <h2>Usuarios</h2>
       <p>Administra los miembros y roles de la empresa.</p>
       <div class="actions">
-        <button (click)="navegarCrearUsuario()">➕ Crear</button>
-        <button (click)="navegarRegistrarEmpresa()">🏢 Registrar Empresa</button>
+        <button (click)="navegarCrearUsuario()">Crear</button>
+        <button (click)="navegarMostrarUsuarios()">Consultar</button>
+        <button (click)="navegarEditarUsuario()">Modificar Usuario</button>
       </div>
     </div>
 
@@ -42,8 +46,9 @@
       <h2>Empresas</h2>
       <p>Consulta o gestiona la información de las organizaciones.</p>
       <div class="actions">
-        <button (click)="navegarRegistrarEmpresa()">➕ Registrar</button>
-        <button (click)="navegarHome()">🏠 Volver al Inicio</button>
+        <button (click)="navegarCrearEmpresa()">Registrar</button>
+        <button (click)="navegarMostrarEmpresas()">Consultar</button>
+        <button (click)="navegarHome()">Volver al Inicio</button>
       </div>
     </div>
   </div>

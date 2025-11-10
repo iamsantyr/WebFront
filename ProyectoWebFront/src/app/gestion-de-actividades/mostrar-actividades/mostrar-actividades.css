@@ -1,62 +1,185 @@
-:host { display:block; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:#0f172a; padding:16px; background:#f8fafc; }
-.title { font-weight:700; font-size:1.1rem; margin:0 0 12px; }
+/* ========== RESET ========== */
+:host,
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+/* ========== BOARD ========== */
 .board {
-  position: relative;
-  min-height: 560px; height: 70vh; max-height: 900px;
-  border: 1px dashed #cbd5e1; border-radius: 14px;
-  background:
-    linear-gradient(transparent 23px, #e2e8f0 24px),
-    linear-gradient(90deg, transparent 23px, #e2e8f0 24px);
-  background-size: 24px 24px;
-  overflow: hidden;
-  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
 }
-.info, .error { display:inline-block; margin: 8px; padding:6px 10px; border-radius:8px; font-size:.9rem; }
-.info { background:#eff6ff; color:#1e40af; border:1px solid #bfdbfe; }
-.error { background:#fee2e2; color:#991b1b; border:1px solid #fecaca; }
+/* ========== BOTÓN VOLVER ========== */
+.volver-btn {
+  align-self: center;
+  margin-top: 32px;
+  padding: 0.8rem 1.6rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
 
+.volver-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+}
+
+.volver-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 3px 8px rgba(37, 99, 235, 0.3);
+}
+
+.volver-btn .arrow {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* Responsive: centra el botón y reduce tamaño */
+@media (max-width: 640px) {
+  .volver-btn {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.95rem;
+    margin-top: 20px;
+  }
+}
+
+/* ========== TITLE ========== */
+.title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #1e293b;
+}
+
+/* ========== TASK LIST ========== */
+.task-list {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  width: 100%;
+  align-content: start;
+}
+
+/* ========== CARD ========== */
 .card {
-  position: absolute;
-  width: 260px; max-width: 40vw;
-  background:#fff; border:1px solid #e5e7eb; border-radius: 14px;
-  padding: 12px 14px; box-shadow: 0 2px 6px rgba(2,6,23,0.08);
-  touch-action: none; user-select: none; cursor: grab; will-change: transform;
-  transition: box-shadow .15s ease, border-color .15s ease;
-}
-.card:active { cursor: grabbing; }
-.card__row { display:flex; align-items:center; gap:10px; }
-.handle { font-size:18px; color:#64748b; }
-.card__title { flex:1; margin:0; font-weight:700; font-size:1rem; }
-.badge { font-size:.72rem; font-weight:700; padding:4px 8px; border-radius:999px; background:#eef2ff; color:#3730a3; border:1px solid #c7d2fe; }
-.card__desc { margin:6px 0 4px; color:#334155; font-size:.92rem; }
-.meta { display:flex; gap:8px; flex-wrap:wrap; }
-.meta__item { display:inline-flex; align-items:center; gap:6px; padding:3px 8px; border-radius:8px; background:#f1f5f9; border:1px solid #e2e8f0; color:#334155; }
-.meta__item.id { background:#fef3c7; border-color:#fde68a; color:#92400e; }
-.meta__label { font-size:.7rem; font-weight:700; text-transform:uppercase; }
-.meta__value { font-size:.85rem; }
-
-.board {
-  position: relative;              /* REQUIRED */
-  min-height: 560px;
-  height: 70vh;
-  border: 1px dashed #cbd5e1;
-  border-radius: 14px;
-  overflow: hidden;
-}
-
-.card {
-  position: absolute;              /* REQUIRED */
-  width: 260px;
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 14px;
-  padding: 12px 14px;
-  box-shadow: 0 2px 6px rgba(2,6,23,0.08);
-
-  touch-action: none;              /* REQUIRED for touch drag */
-  user-select: none;               /* avoid text selection */
-  -webkit-user-drag: none;         /* Safari: avoid ghost image */
-  pointer-events: auto;            /* ensure it can receive pointer events */
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
   cursor: grab;
 }
-.card:active { cursor: grabbing; }
+.card:active {
+  cursor: grabbing;
+}
+.card.drag-over {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+  transform: translateY(-2px);
+}
+
+/* ========== CARD CONTENT ========== */
+.card__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.handle {
+  font-size: 20px;
+  color: #64748b;
+  cursor: grab;
+  user-select: none;
+}
+
+.card__title {
+  flex: 1;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+  text-align: left;
+}
+
+.badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #3730a3;
+  border: 1px solid #c7d2fe;
+}
+
+/* ========== DESCRIPTION ========== */
+.card__desc {
+  font-size: 0.9rem;
+  line-height: 1.3rem;
+  color: #334155;
+  margin: 0 0 10px;
+}
+
+/* ========== META ========== */
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.meta__item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f1f5f9;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: #334155;
+}
+.meta__item.id {
+  background: #fef3c7;
+  color: #92400e;
+}
+.meta__label {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* ========== DRAG ACTIVE GLOBAL FEEDBACK ========== */
+.board.drag-active {
+  outline: 3px dashed #60a5fa;
+  background: rgba(191, 219, 254, 0.2);
+  transition: background 0.2s ease;
+}
+
+/* Responsive tweaks */
+@media (max-width: 640px) {
+  .task-list {
+    grid-template-columns: 1fr;
+  }
+}
