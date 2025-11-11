@@ -2,23 +2,16 @@
 export type ProcessStatus = 'DRAFT' | 'PUBLISHED' | 'INACTIVE' ;
 
 export class ProcesoDto {
-  id: number | null = null;
-  name: string = '';
-  description: string = '';
-  category: string | null = null;
-  status: ProcessStatus = 'DRAFT';
-  organizationId: number | null = null;
+  constructor(
+  public id?: number,
+  public name?: string,
+  public description?: string,
+  public category?: string,
+  public status?: ProcessStatus,
+  public organizationId?: number,
+  public activityIds?: number[],
+  public archIds?: number[],
+  public gatewayIds?: number[]){
 
-  // ¡NO opcionales! Siempre arrays:
-  activityIds: number[] = [];
-  archIds: number[] = [];
-  gatewayIds: number[] = [];
-
-  constructor(init?: Partial<ProcesoDto>) {
-    Object.assign(this, init);
-    // protección extra si te llega undefined desde fuera
-    this.activityIds ??= [];
-    this.archIds ??= [];
-    this.gatewayIds ??= [];
   }
 }

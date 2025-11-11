@@ -9,6 +9,7 @@ import { EditarUsuario } from './autenticacion-y-cuentas/editar-usuario/editar-u
 import { MostrarUsuarios } from './autenticacion-y-cuentas/mostrar-usuario/mostrar-usuario';
 import { MostrarEmpresa } from './autenticacion-y-cuentas/mostrar-empresa/mostrar-empresa';
 import { EditarEmpresa } from './autenticacion-y-cuentas/editar-empresa/editar-empresa';
+import { ConsultarProceso } from './gestion-de-procesos/consultar-proceso/consultar-proceso';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -29,6 +30,7 @@ export const routes: Routes = [
     { path: 'editar-empresa', component: EditarEmpresa},
     { path: 'mostrar-usuario', component: MostrarUsuarios},
     { path: 'mostrar-empresas', component: MostrarEmpresa },
+    { path: 'mostrar-procesos', component: ConsultarProceso},
     { path: 'eliminar-actividad', loadComponent: () => import('./gestion-de-actividades/eliminar-actividad/eliminar-actividad').then(m => m.EliminarActividad) },
     { path: 'crear-actividad',loadComponent: () => import('./gestion-de-actividades/crear-actividad/crear-actividad').then(m => m.CrearActividad)},
     { path: '**', redirectTo: '' },
