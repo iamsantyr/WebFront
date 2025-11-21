@@ -1,0 +1,104 @@
+<div class="editar-container">
+  <div class="card">
+    <!-- Header con icono decorativo -->
+    <div class="card-header">
+      <div class="icon-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+        </svg>
+      </div>
+      <h2>Modificar Actividad</h2>
+      <p class="subtitle">Actualiza la información de una actividad existente dentro de un proceso</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="guardar()" novalidate>
+      <!-- ID de la actividad -->
+      <div class="field">
+        <label for="id">ID de la Actividad</label>
+        <input
+          id="id"
+          type="number"
+          formControlName="id"
+          placeholder="Ej: 1"
+        />
+        <small class="err" *ngIf="c('id').touched && c('id').invalid">
+          Debes ingresar un ID válido para modificar una actividad existente
+        </small>
+      </div>
+
+      <!-- Nombre -->
+      <div class="field">
+        <label for="name">Nombre de la Actividad</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="Ej: Validar información del cliente"
+        />
+        <small class="err" *ngIf="c('name').touched && c('name').invalid">
+          El nombre es obligatorio (mínimo 2 caracteres)
+        </small>
+      </div>
+
+      <!-- Tipo -->
+      <div class="field">
+        <label for="type">Tipo de Actividad</label>
+        <select id="type" formControlName="type">
+          <option value="" disabled selected>Seleccione un tipo</option>
+          <option *ngFor="let t of tipos" [value]="t">
+            {{ t | titlecase }}
+          </option>
+        </select>
+        <small class="err" *ngIf="c('type').touched && c('type').invalid">
+          El tipo es obligatorio
+        </small>
+      </div>
+
+      <!-- Descripción -->
+      <div class="field">
+        <label for="description">Descripción</label>
+        <textarea
+          id="description"
+          rows="3"
+          formControlName="description"
+          placeholder="Describe brevemente la actividad (opcional)"
+        ></textarea>
+      </div>
+
+      <!-- Coordenadas -->
+      <div class="grid-2">
+        <div class="field">
+          <label for="x">Posición X</label>
+          <input id="x" type="number" formControlName="x" placeholder="0" />
+        </div>
+
+        <div class="field">
+          <label for="y">Posición Y</label>
+          <input id="y" type="number" formControlName="y" placeholder="0" />
+        </div>
+      </div>
+
+      <!-- Error global -->
+      <div class="error-message" *ngIf="errorMessage" role="alert">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Botones -->
+      <div class="actions">
+        <button class="btn guardar-btn" type="submit" [disabled]="loading">
+          <span class="button-content">
+            {{ loading ? 'Actualizando...' : 'Guardar Cambios' }}
+          </span>
+        </button>
+        <button class="btn cancelar-btn" type="button" (click)="cancelar()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

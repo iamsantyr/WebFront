@@ -1,0 +1,151 @@
+:root{
+  --bg-1: #eef2f7;
+  --bg-2: #cbd5e1;
+  --card-bg: #ffffff;
+  --accent: #2563eb;
+  --accent-2: #1e40af;
+  --muted: #475569;
+  --radius: 16px;
+  --shadow: 0 8px 28px rgba(15,23,42,0.06);
+  --max-w: 1100px;
+  --gap: 30px;
+}
+
+/* Contenedor principal */
+.home-container {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, var(--bg-1), var(--bg-2));
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: #0f1724;
+  padding: 40px 20px;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Logo (esquina superior derecha) */
+.home-logo {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+  z-index: 10;
+  opacity: 0.95;
+  transition: transform .18s ease, opacity .2s ease;
+}
+.home-logo:hover { transform: scale(1.06); opacity: 1; }
+
+/* Header */
+.home-header {
+  text-align: center;
+  margin-bottom: 36px;
+  width: 100%;
+}
+.home-header h1 {
+  font-size: 2.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #0b1220;
+  line-height: 1.05;
+}
+.home-header p {
+  font-size: 1rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Grid de tarjetas */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--gap);
+  width: 100%;
+  max-width: var(--max-w);
+  align-items: stretch;
+}
+
+/* Tarjeta */
+.entity-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  transition: transform .18s ease, box-shadow .2s ease, border-color .18s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 160px;
+  border: 1px solid rgba(15,23,42,0.03);
+}
+.entity-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(15,23,42,0.09);
+}
+
+/* Contenido de tarjeta */
+.entity-card h2 {
+  font-size: 1.25rem;
+  color: #0f1724;
+  margin: 0 0 8px;
+  font-weight: 800;
+}
+.entity-card p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin: 0 0 16px;
+  flex: 1 0 auto;
+}
+
+/* Acciones (botones) */
+.actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+.actions button {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .14s ease, opacity .12s ease;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.actions button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 26px rgba(37,99,235,0.14);
+}
+.actions button:active { transform: translateY(0); }
+
+/* Small/secondary button style (if needed) */
+.actions .btn-outline {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid rgba(37,99,235,0.12);
+  font-weight: 700;
+}
+.actions .btn-outline:hover { background: rgba(37,99,235,0.06); }
+
+/* Accessibility: focus states */
+.entity-card:focus-within,
+.actions button:focus {
+  outline: 3px solid rgba(37,99,235,0.12);
+  outline-offset: 2px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 640px) {
+  .home-logo { right: 16px; width: 110px; top: 14px; }
+  .home-header h1 { font-size: 1.6rem; text-align: center; }
+  .card-grid { gap: 18px; }
+  .entity-card { padding: 18px; min-height: 140px; }
+}

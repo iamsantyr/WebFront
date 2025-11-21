@@ -1,0 +1,59 @@
+<div class="role-container">
+  <div class="role-card">
+    <!-- Header con icono decorativo -->
+    <div class="card-header">
+      <div class="icon-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="8.5" cy="7" r="4"></circle>
+          <polyline points="17 11 19 13 23 9"></polyline>
+        </svg>
+      </div>
+      <h2>Crear Rol de Proceso</h2>
+      <p class="subtitle">Define un nuevo rol para asignar en procesos</p>
+    </div>
+
+    <form (ngSubmit)="onCrearRol()" #rolForm="ngForm">
+      <!-- Nombre del rol -->
+      <div class="input-group">
+        <label for="nombreRol">Nombre del Rol</label>
+        <input
+          type="text"
+          id="nombreRol"
+          name="nombreRol"
+          [(ngModel)]="nombreRol"
+          required
+          placeholder="Ej: Analista, Supervisor, Auditor"
+        />
+      </div>
+
+      <!-- Descripción -->
+      <div class="input-group">
+        <label for="descripcion">Descripción</label>
+        <textarea
+          id="descripcion"
+          name="descripcion"
+          [(ngModel)]="descripcion"
+          required
+          placeholder="Describe brevemente las funciones del rol"
+          rows="4"
+        ></textarea>
+      </div>
+
+      <!-- Botón de envío -->
+      <button type="submit" [disabled]="rolForm.invalid">
+        <span class="button-content">Crear Rol</span>
+      </button>
+
+      <!-- Nota informativa -->
+      <div class="info-note">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <p>Este rol quedará asociado a la empresa y podrá usarse en múltiples procesos</p>
+      </div>
+    </form>
+  </div>
+</div>

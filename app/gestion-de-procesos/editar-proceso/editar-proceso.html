@@ -1,0 +1,164 @@
+<div class="registro-container">
+  <div class="registro-card">
+    <!-- Header con icono decorativo -->
+    <div class="card-header">
+      <div class="icon-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+        </svg>
+      </div>
+      <h2>Editar Proceso</h2>
+      <p class="subtitle">Actualiza la información del proceso</p>
+    </div>
+
+    <form (ngSubmit)="onActualizarProceso()" #editarForm="ngForm">
+      <!-- Nombre -->
+      <div class="input-group">
+        <label for="name">Nombre del Proceso</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          [(ngModel)]="procesoDto.name"
+          required
+          placeholder="Ej: Gestión de reservas"
+        />
+      </div>
+
+      <!-- Descripción -->
+      <div class="input-group">
+        <label for="description">Descripción</label>
+        <textarea
+          id="description"
+          name="description"
+          [(ngModel)]="procesoDto.description"
+          required
+          rows="3"
+          placeholder="Actualiza la descripción del proceso"
+        ></textarea>
+      </div>
+
+      <!-- Categoría -->
+      <div class="input-group">
+        <label for="category">Categoría</label>
+        <input
+          type="text"
+          id="category"
+          name="category"
+          [(ngModel)]="procesoDto.category"
+          placeholder="Ej: Operativo / Administrativo / Servicio"
+        />
+      </div>
+
+      <!-- Estado -->
+      <div class="input-group">
+        <label for="status">Estado del Proceso</label>
+        <select
+          id="status"
+          name="status"
+          [(ngModel)]="procesoDto.status"
+          required
+        >
+          <option [ngValue]="null" disabled>Selecciona un estado</option>
+          <option *ngFor="let s of statuses" [ngValue]="s">{{ s }}</option>
+        </select>
+      </div>
+
+      <!-- Organización -->
+      <div class="input-group">
+        <label for="organizationId">ID de Organización</label>
+        <input
+          type="number"
+          id="organizationId"
+          name="organizationId"
+          [(ngModel)]="procesoDto.organizationId"
+          required
+          min="1"
+          placeholder="Ej: 900123456"
+        />
+      </div>
+
+      <!-- ===== SECCIÓN DE RELACIONES ===== -->
+      <div class="relations-section">
+        <h3 class="section-title">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+          Relaciones del Proceso
+        </h3>
+
+        <!-- Actividades -->
+        <div class="input-group">
+          <label for="activityIds">Actividades (IDs)</label>
+          <select
+            multiple
+            id="activityIds"
+            name="activityIds"
+            [(ngModel)]="procesoDto.activityIds"
+            size="5"
+          >
+            <option *ngFor="let a of activitiesCatalogo" [ngValue]="a.id">
+              {{ a.id }} — {{ a.name }}
+            </option>
+          </select>
+          <small class="hint">Mantén presionado Ctrl/Cmd para seleccionar múltiples</small>
+        </div>
+
+        <!-- Arcos -->
+        <div class="input-group">
+          <label for="archIds">Arcos (IDs)</label>
+          <select
+            multiple
+            id="archIds"
+            name="archIds"
+            [(ngModel)]="procesoDto.archIds"
+            size="5"
+          >
+            <option *ngFor="let ar of archsCatalogo" [ngValue]="ar.id">
+              {{ ar.id }} — ({{ ar.actividadI }} ➜ {{ ar.actividadD }})
+            </option>
+          </select>
+          <small class="hint">Mantén presionado Ctrl/Cmd para seleccionar múltiples</small>
+        </div>
+
+        <!-- Gateways -->
+        <div class="input-group">
+          <label for="gatewayIds">Gateways (IDs)</label>
+          <select
+            multiple
+            id="gatewayIds"
+            name="gatewayIds"
+            [(ngModel)]="procesoDto.gatewayIds"
+            size="5"
+          >
+            <option *ngFor="let g of gatewaysCatalogo" [ngValue]="g.id">
+              {{ g.id }} — {{ g.type }}
+            </option>
+          </select>
+          <small class="hint">Mantén presionado Ctrl/Cmd para seleccionar múltiples</small>
+        </div>
+      </div>
+
+      <!-- Mensaje de estado -->
+      <div *ngIf="mensajeHistorialProceso" class="status-message">
+        {{ mensajeHistorialProceso }}
+      </div>
+
+      <!-- BOTONES -->
+      <div class="button-group">
+        <button type="submit" [disabled]="editarForm.invalid">
+          <span class="button-content">Guardar Cambios</span>
+        </button>
+        <button type="button" (click)="cancelar()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<div
+  class="board"
+  (dragover)="onDragOver($event)"
+  (drop)="onDropOutside($event)"
+>
+  <!-- Header mejorado -->
+  <div class="board-header">
+    <div class="header-content">
+      <div class="icon-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+      </div>
+      <div>
+        <h2 class="title">Actividades</h2>
+        <p class="subtitle">Arrastra las tarjetas para reorganizar</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="task-list">
+    @for (act of activities; track act.id; let i = $index) {
+      <article
+        class="card"
+        [class.drag-over]="overIndex === i"
+        draggable="true"
+        (dragstart)="onDragStart(i, $event)"
+        (dragenter)="onDragEnter(i)"
+        (dragleave)="onDragLeave()"
+        (dragover)="onDragOver($event)"
+        (drop)="onDrop(i, $event)"
+        (dragend)="onDragEnd()"
+      >
+        <div class="card__row">
+          <span class="handle" aria-label="Arrastrar tarjeta">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="5" r="1"></circle>
+              <circle cx="9" cy="12" r="1"></circle>
+              <circle cx="9" cy="19" r="1"></circle>
+              <circle cx="15" cy="5" r="1"></circle>
+              <circle cx="15" cy="12" r="1"></circle>
+              <circle cx="15" cy="19" r="1"></circle>
+            </svg>
+          </span>
+          <h3 class="card__title">{{ act.name || 'Actividad sin nombre' }}</h3>
+        </div>
+
+        <p class="card__desc">
+          {{ act.description || 'Sin descripción' }}
+        </p>
+
+        <div class="meta">
+          <div class="meta__item">
+            <span class="meta__label">X</span>
+            <span class="meta__value">{{ act.x ?? '—' }}</span>
+          </div>
+          <div class="meta__item">
+            <span class="meta__label">Y</span>
+            <span class="meta__value">{{ act.y ?? '—' }}</span>
+          </div>
+          <div class="meta__item id">
+            <span class="meta__label">ID</span>
+            <span class="meta__value">{{ act.id }}</span>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <button class="btn-delete" (click)="eliminarActividad(act.id)">
+            <svg xmlns="http://www.w3.org/2000/s

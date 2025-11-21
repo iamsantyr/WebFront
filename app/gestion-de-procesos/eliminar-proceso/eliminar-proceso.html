@@ -1,0 +1,51 @@
+<div class="eliminar-proceso-container">
+  <div class="eliminar-proceso-card">
+    <!-- Header con icono de advertencia -->
+    <div class="card-header danger">
+      <div class="icon-wrapper danger">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+      </div>
+      <h2>Eliminar Proceso</h2>
+      <p class="subtitle">Esta acción no se puede deshacer</p>
+    </div>
+
+    <div class="confirmacion-content">
+      <p class="confirmacion-texto">
+        ¿Estás seguro de que deseas eliminar el proceso
+        <strong class="highlight">{{ nombreProceso }}</strong>?
+      </p>
+
+      <div class="info-box">
+        <div class="info-row">
+          <span class="label">Estado actual:</span>
+          <span class="value status-badge">{{ estadoProceso }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="boton-accion" *ngIf="!confirmado">
+      <button class="btn-eliminar" (click)="confirmarEliminacion()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="3 6 5 6 21 6"></polyline>
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        </svg>
+        Confirmar Eliminación
+      </button>
+      <button class="btn-cancelar" (click)="cancelar()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+        Cancelar
+      </button>
+    </div>
+
+    <div *ngIf="mensajeConfirmacion" class="mensaje success">
+      {{ mensajeConfirmacion }}
+    </div>
+  </div>
+</div>
