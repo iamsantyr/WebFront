@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
@@ -14,12 +14,14 @@ import { LoginService } from '../../services/Login/login-service';
 })
 export class Login implements OnInit {
   errorMessage: string | null = null;
-  loginDto: LoginDto= new LoginDto();
+  loginDto: LoginDto = new LoginDto();
 
   constructor(
     private loginService: LoginService,
     private router: Router
-  ) {}  
+  ) {}
+
+  ngOnInit(): void {}
 
   onSubmit() {
     console.log('Correo:', this.loginDto.email);
@@ -27,28 +29,21 @@ export class Login implements OnInit {
     this.loginUser();
   }
 
-loginUser() {
-  this.errorMessage = null;
-  this.loginService.loginSolv(this.loginDto).subscribe(
-    (data) => {
-      if (data) {
+  loginUser() {
+    this.errorMessage = null;
+
+    this.loginService.loginSolv(this.loginDto).subscribe({
+      next: (resp) => {
         this.navegarHomeScreen();
-      } else {
+      },
+      error: (error) => {
+        console.error('Error al iniciar sesión:', error);
         this.errorMessage = 'Las credenciales no coinciden, intenta de nuevo.';
       }
-    },
-    (error) => {
-      console.error('Error al iniciar sesión:', error);
-      alert("Las credenciales no coinciden, intenta de nuevo.");
-    }
-  );
-}
-
-  ngOnInit(): void {
-    
+    });
   }
-  navegarHomeScreen(){
+
+  navegarHomeScreen() {
     this.router.navigate(['/home']);
   }
-   
 }
