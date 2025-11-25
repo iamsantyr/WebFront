@@ -5,9 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class LocalStorageService {
   
-  /**
-   * Verifica si localStorage está disponible
-   */
   private isLocalStorageAvailable(): boolean {
     try {
       const test = '__localStorage_test__';
@@ -19,9 +16,7 @@ export class LocalStorageService {
     }
   }
 
-  /**
-   * Obtiene un valor del localStorage de forma segura
-   */
+ 
   getItem(key: string): string | null {
     if (typeof window !== 'undefined' && this.isLocalStorageAvailable()) {
       try {
@@ -34,9 +29,6 @@ export class LocalStorageService {
     return null;
   }
 
-  /**
-   * Guarda un valor en localStorage de forma segura
-   */
   setItem(key: string, value: string): void {
     if (typeof window !== 'undefined' && this.isLocalStorageAvailable()) {
       try {
@@ -47,9 +39,7 @@ export class LocalStorageService {
     }
   }
 
-  /**
-   * Elimina un valor del localStorage de forma segura
-   */
+ 
   removeItem(key: string): void {
     if (typeof window !== 'undefined' && this.isLocalStorageAvailable()) {
       try {
@@ -60,9 +50,7 @@ export class LocalStorageService {
     }
   }
 
-  /**
-   * Limpia todo el localStorage de forma segura
-   */
+
   clear(): void {
     if (typeof window !== 'undefined' && this.isLocalStorageAvailable()) {
       try {

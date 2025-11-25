@@ -15,7 +15,7 @@ export interface GatewayDto {
   providedIn: 'root'
 })
 export class GatewayService {
-  private baseUrl = '/api/gateways';
+  private baseUrl = 'http://10.43.102.198:8080/api/gateways';
 
   constructor(private http: HttpClient) {}
 

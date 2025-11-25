@@ -13,7 +13,7 @@ export interface AuthResponse {
   providedIn: 'root',
 })
 export class LoginService {
-  private urlServidor: string = 'http://localhost:8080/api';
+  private urlServidor: string = 'http://10.43.102.198:8080/api';
   private urlLogin = this.urlServidor + '/auth/login';
 
   constructor(private httpClient: HttpClient) {

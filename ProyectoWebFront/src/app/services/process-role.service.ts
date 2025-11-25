@@ -13,7 +13,7 @@ export interface ProcessRoleDto {
   providedIn: 'root'
 })
 export class ProcessRoleService {
-  private baseUrl = '/api/process-roles';
+  private baseUrl = 'http://10.43.102.198:8080/api/process-roles';
 
   constructor(private http: HttpClient) {}
 

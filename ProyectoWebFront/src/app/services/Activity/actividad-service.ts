@@ -5,7 +5,7 @@ import { ActividadDto } from '../../dto/actividadDto';
 
 @Injectable({ providedIn: 'root' })
 export class ActividadService {
-  base: string = "http://localhost:8080/api/activities";
+  base: string = "http://10.43.102.198:8080/api/activities";
   
   constructor(private httpClient: HttpClient) {}
   

@@ -17,7 +17,7 @@ export interface OrganizationDto {
   providedIn: 'root'
 })
 export class OrganizationService {
-  private baseUrl = '/api/organizations';
+  private baseUrl = 'http://10.43.102.198:8080/api/organizations';
 
   constructor(private http: HttpClient) {}
 

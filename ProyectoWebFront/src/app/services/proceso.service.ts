@@ -15,7 +15,7 @@ export interface ProcessHistory {
 
 @Injectable({ providedIn: 'root' })
 export class ProcesoService {
-  private readonly baseUrl = 'http://localhost:8080/api/processes';
+  private readonly baseUrl = 'http://10.43.102.198:8080/api/processes';
 
   constructor(private http: HttpClient) {}
 

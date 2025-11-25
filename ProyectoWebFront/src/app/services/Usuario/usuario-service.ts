@@ -7,7 +7,7 @@ import { UsuarioDto } from '../../dto/userDto';
   providedIn: 'root',
 })
 export class UsuarioService {
-  private readonly baseUrl = 'http://localhost:8080/api/people';
+  private readonly baseUrl = 'http://10.43.102.198:8080/api/people';
 
   constructor(private http: HttpClient) {}
 
