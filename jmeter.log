@@ -1,0 +1,43 @@
+2025-11-25 00:46:15,910 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
+2025-11-25 00:46:15,943 INFO o.a.j.JMeter: Loading user properties from: C:\Users\Lenovo\Downloads\apache-jmeter-5.6.3\apache-jmeter-5.6.3\bin\user.properties
+2025-11-25 00:46:15,945 INFO o.a.j.JMeter: Loading system properties from: C:\Users\Lenovo\Downloads\apache-jmeter-5.6.3\apache-jmeter-5.6.3\bin\system.properties
+2025-11-25 00:46:15,958 INFO o.a.j.JMeter: Copyright (c) 1998-2024 The Apache Software Foundation
+2025-11-25 00:46:15,958 INFO o.a.j.JMeter: Version 5.6.3
+2025-11-25 00:46:15,958 INFO o.a.j.JMeter: java.version=17.0.17
+2025-11-25 00:46:15,958 INFO o.a.j.JMeter: java.vm.name=OpenJDK 64-Bit Server VM
+2025-11-25 00:46:15,958 INFO o.a.j.JMeter: os.name=Windows 11
+2025-11-25 00:46:15,958 INFO o.a.j.JMeter: os.arch=amd64
+2025-11-25 00:46:15,958 INFO o.a.j.JMeter: os.version=10.0
+2025-11-25 00:46:15,958 INFO o.a.j.JMeter: file.encoding=Cp1252
+2025-11-25 00:46:15,958 INFO o.a.j.JMeter: java.awt.headless=null
+2025-11-25 00:46:15,958 INFO o.a.j.JMeter: Max memory     =1073741824
+2025-11-25 00:46:15,958 INFO o.a.j.JMeter: Available Processors =8
+2025-11-25 00:46:15,981 INFO o.a.j.JMeter: Default Locale=English (EN)
+2025-11-25 00:46:15,981 INFO o.a.j.JMeter: JMeter  Locale=English (EN)
+2025-11-25 00:46:15,981 INFO o.a.j.JMeter: JMeterHome=C:\Users\Lenovo\Downloads\apache-jmeter-5.6.3\apache-jmeter-5.6.3
+2025-11-25 00:46:15,981 INFO o.a.j.JMeter: user.dir  =C:\Users\Lenovo\Downloads\ProyectoWeb-main
+2025-11-25 00:46:15,982 INFO o.a.j.JMeter: PWD       =C:\Users\Lenovo\Downloads\ProyectoWeb-main
+2025-11-25 00:46:15,985 INFO o.a.j.JMeter: IP: 192.168.1.11 Name: LAPTOP-SBELTRAN FullName: host.docker.internal
+2025-11-25 00:46:16,007 INFO o.a.j.JMeter: Loaded icon properties from org/apache/jmeter/images/icon.properties
+2025-11-25 00:46:16,269 INFO o.a.j.JMeterGuiLauncher: Setting LAF to: com.github.weisj.darklaf.DarkLaf:com.github.weisj.darklaf.theme.DarculaTheme
+2025-11-25 00:46:18,300 INFO o.a.j.JMeterGuiLauncher: Loading file: jmeter\load_test.jmx
+2025-11-25 00:46:18,307 INFO o.a.j.s.FileServer: Default base='C:\Users\Lenovo\Downloads\ProyectoWeb-main'
+2025-11-25 00:46:18,309 INFO o.a.j.s.FileServer: Set new base='C:\Users\Lenovo\Downloads\ProyectoWeb-main\jmeter'
+2025-11-25 00:46:18,807 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
+2025-11-25 00:46:18,863 INFO o.a.j.s.SaveService: Using SaveService properties version 5.0
+2025-11-25 00:46:18,863 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
+2025-11-25 00:46:18,868 INFO o.a.j.s.SaveService: Loading file: jmeter\load_test.jmx
+2025-11-25 00:46:18,870 ERROR o.a.j.JMeterGuiLauncher: Failure loading test file
+java.io.FileNotFoundException: jmeter\load_test.jmx (El sistema no puede encontrar la ruta especificada)
+	at java.base/java.io.FileInputStream.open0(Native Method) ~[?:?]
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:216) ~[?:?]
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:157) ~[?:?]
+	at org.apache.jmeter.save.SaveService.loadTree(SaveService.java:426) ~[ApacheJMeter_core.jar:5.6.3]
+	at org.apache.jmeter.JMeterGuiLauncher$loadFile$2.invokeSuspend(JMeterGuiLauncher.kt:140) ~[ApacheJMeter_core.jar:5.6.3]
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33) ~[kotlin-stdlib-1.9.22.jar:1.9.22-release-704]
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:108) ~[kotlinx-coroutines-core-jvm-1.7.3.jar:?]
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:584) ~[kotlinx-coroutines-core-jvm-1.7.3.jar:?]
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:793) ~[kotlinx-coroutines-core-jvm-1.7.3.jar:?]
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:697) ~[kotlinx-coroutines-core-jvm-1.7.3.jar:?]
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:684) ~[kotlinx-coroutines-core-jvm-1.7.3.jar:?]
+2025-11-25 00:46:18,880 ERROR o.a.j.u.JMeterUtils: java.io.FileNotFoundException: jmeter\load_test.jmx (El sistema no puede encontrar la ruta especificada)
