@@ -1,162 +1,218 @@
 /* ========== CONTENEDOR PRINCIPAL ========== */
 .registro-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #007bff, #00c6ff);
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  padding: 1rem;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background: #f4f5fb; /* fondo claro */
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 /* ========== TARJETA DEL FORMULARIO ========== */
 .registro-card {
-  background: #ffffff;
-  padding: 2.5rem 3rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
   width: 100%;
-  max-width: 460px;
-  text-align: center;
-  animation: fadeIn 0.8s ease-in-out;
+  max-width: 620px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e2e5f2;
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.12);
+  padding: 2.2rem 2.4rem;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  animation: cardIn 0.6s ease-out;
 }
 
-/* ========== TÍTULOS ========== */
+/* barra decorativa en el borde izquierdo */
+.registro-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.9rem;
+  bottom: 0.9rem;
+  width: 4px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #5b21ff, #06b6d4);
+}
+
+/* ========== TÍTULO ========== */
 .registro-card h2 {
-  margin-bottom: 1.5rem;
-  color: #333;
-  font-weight: 600;
+  margin: 0 0 1.4rem;
+  color: #111827;
   font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
-/* ========== GRUPOS DE INPUT ========== */
-.input-group {
+/* ========== FORMULARIO / GRUPOS DE INPUT ========== */
+.registro-card form {
   display: flex;
   flex-direction: column;
+  gap: 0.85rem;
+}
+
+.input-group {
   text-align: left;
-  margin-bottom: 1.2rem;
 }
 
 .input-group label {
+  display: inline-block;
   font-size: 0.9rem;
-  color: #555;
-  margin-bottom: 0.3rem;
-  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
 }
 
+/* inputs, selects y textareas con el mismo estilo */
 .input-group input,
 .input-group select,
 .input-group textarea {
-  padding: 0.7rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  outline: none;
-  font-size: 0.95rem;
-  transition: all 0.2s ease-in-out;
   width: 100%;
+  padding: 0.7rem 0.85rem;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 0.95rem;
+  background-color: #f9fafb;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease,
+    background-color 0.18s ease, transform 0.08s ease;
   resize: vertical;
+}
+
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+  color: #9ca3af;
 }
 
 .input-group input:focus,
 .input-group select:focus,
 .input-group textarea:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+  border-color: #5b21ff;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(91, 33, 255, 0.12);
+  transform: translateY(-1px);
 }
 
 /* ===== SELECT MÚLTIPLE ===== */
 .input-group select[multiple] {
-  height: auto;
-  min-height: 100px;
-  background-color: #f9f9f9;
-  border: 1px solid #ccc;
+  min-height: 120px;
+  background-color: #f9fafb;
 }
 
 .input-group select option {
-  padding: 0.3rem;
+  padding: 0.3rem 0.4rem;
 }
 
 /* ========== BOTONES PRINCIPALES ========== */
 .button-group {
   display: flex;
-  justify-content: space-between;
-  gap: 1rem;
+  justify-content: flex-end;
+  gap: 0.75rem;
   margin-top: 1.8rem;
 }
 
-button {
-  flex: 1;
-  padding: 0.8rem;
+/* estilo base para botones */
+.button-group button {
   border: none;
-  border-radius: 8px;
+  border-radius: 999px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  padding: 0.78rem 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.18s ease,
+    background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
 }
 
-/* Botón principal (Guardar) */
-button[type="submit"] {
-  background-color: #007bff;
-  color: white;
+/* Botón principal (Guardar cambios) */
+.button-group button[type="submit"] {
+  background: linear-gradient(135deg, #5b21ff, #06b6d4);
+  color: #f9fafb;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
-button[type="submit"]:hover:not(:disabled) {
-  background-color: #0056b3;
+.button-group button[type="submit"]::after {
+  content: "→";
+  font-size: 1.05rem;
 }
 
-button[type="submit"]:disabled {
-  background-color: #b5d1ff;
+.button-group button[type="submit"]:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 35px rgba(37, 99, 235, 0.45);
+  filter: brightness(1.03);
+}
+
+.button-group button[type="submit"]:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.35);
+}
+
+.button-group button[type="submit"]:disabled {
+  background: #d1d5db;
+  box-shadow: none;
   cursor: not-allowed;
+  color: #6b7280;
 }
 
 /* Botón secundario (Cancelar) */
-button[type="button"] {
-  background-color: #00b894;
-  color: white;
+.button-group button[type="button"] {
+  background-color: #ffffff;
+  color: #374151;
+  border: 1px solid #d1d5db;
 }
 
-button[type="button"]:hover {
-  background-color: #00997d;
+.button-group button[type="button"]:hover {
+  background-color: #f3f4f6;
+  border-color: #cbd5e1;
+}
+
+.button-group button[type="button"]:active {
+  background-color: #e5e7eb;
 }
 
 /* ========== MENSAJE DE ESTADO ========== */
 .status-message {
   margin-top: 1.2rem;
-  color: #007bff;
+  color: #5b21ff;
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
-/* ========== ANIMACIÓN ========== */
-@keyframes fadeIn {
+/* ========== ANIMACIÓN TARJETA ========== */
+@keyframes cardIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px) scale(0.98);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
 /* ========== RESPONSIVE ========== */
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .registro-card {
-    padding: 2rem;
-    width: 90%;
+    padding: 1.7rem 1.4rem 1.9rem;
+    border-radius: 0.75rem;
   }
 
-  .input-group label {
-    font-size: 0.85rem;
+  .registro-card h2 {
+    font-size: 1.4rem;
   }
 
   .button-group {
-    flex-direction: column;
+    flex-direction: column-reverse;
+    align-items: stretch;
   }
 
-  button {
+  .button-group button {
     width: 100%;
-    font-size: 0.9rem;
   }
 }
