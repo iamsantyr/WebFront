@@ -1,11 +1,11 @@
-/* ========== RESET ========== */
+/* ========== RESET / LAYOUT GENERAL ========== */
 :host,
 html,
 body {
   height: 100%;
   margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  background: #f8fafc;
+  background: #f4f5fb;
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: #0f172a;
 }
 
@@ -15,61 +15,19 @@ body {
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
-  padding: 24px;
+  padding: 2rem 1rem;
   box-sizing: border-box;
-}
-/* ========== BOTÓN VOLVER ========== */
-.volver-btn {
-  align-self: center;
-  margin-top: 32px;
-  padding: 0.8rem 1.6rem;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
-  border: none;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-  cursor: pointer;
-  transition: all 0.25s ease;
-  display: flex;
   align-items: center;
-  gap: 0.6rem;
-}
-
-.volver-btn:hover {
-  transform: translateY(-2px) scale(1.03);
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
-}
-
-.volver-btn:active {
-  transform: translateY(1px);
-  box-shadow: 0 3px 8px rgba(37, 99, 235, 0.3);
-}
-
-.volver-btn .arrow {
-  font-size: 1.2rem;
-  line-height: 1;
-}
-
-/* Responsive: centra el botón y reduce tamaño */
-@media (max-width: 640px) {
-  .volver-btn {
-    width: 100%;
-    justify-content: center;
-    font-size: 0.95rem;
-    margin-top: 20px;
-  }
 }
 
 /* ========== TITLE ========== */
 .title {
   font-size: 1.6rem;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 1.4rem;
   text-align: center;
-  color: #1e293b;
+  color: #111827;
+  letter-spacing: 0.02em;
 }
 
 /* ========== TASK LIST ========== */
@@ -77,42 +35,65 @@ body {
   flex: 1;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
+  gap: 1rem;
   width: 100%;
+  max-width: 1000px;
   align-content: start;
 }
 
 /* ========== CARD ========== */
 .card {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e2e5f2;
   border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  padding: 1.1rem 1.2rem;
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
   cursor: grab;
+  position: relative;
+  overflow: hidden;
 }
+
+/* barra decorativa lateral */
+.card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.75rem;
+  bottom: 0.75rem;
+  width: 4px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #5b21ff, #06b6d4);
+}
+
 .card:active {
   cursor: grabbing;
 }
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 38px rgba(15, 23, 42, 0.16);
+}
+
+/* estado cuando se arrastra encima */
 .card.drag-over {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+  border-color: #5b21ff;
+  box-shadow: 0 0 0 3px rgba(91, 33, 255, 0.18);
   transform: translateY(-2px);
 }
 
-/* ========== CARD CONTENT ========== */
+/* ========== CONTENIDO DE LA CARD ========== */
 .card__row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 8px;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .handle {
-  font-size: 20px;
-  color: #64748b;
+  font-size: 1.1rem;
+  color: #9ca3af;
   cursor: grab;
   user-select: none;
 }
@@ -121,93 +102,143 @@ body {
   flex: 1;
   font-size: 1rem;
   font-weight: 600;
-  color: #0f172a;
+  color: #111827;
   margin: 0;
   text-align: left;
-}
-
-.badge {
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 4px 8px;
-  border-radius: 999px;
-  background: #eef2ff;
-  color: #3730a3;
-  border: 1px solid #c7d2fe;
 }
 
 /* ========== DESCRIPTION ========== */
 .card__desc {
   font-size: 0.9rem;
-  line-height: 1.3rem;
-  color: #334155;
-  margin: 0 0 10px;
+  line-height: 1.35rem;
+  color: #374151;
+  margin: 0 0 0.5rem;
 }
 
 /* ========== META ========== */
 .meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 0.5rem;
 }
 
 .meta__item {
   display: flex;
   align-items: center;
-  gap: 6px;
-  background: #f1f5f9;
-  padding: 4px 8px;
+  gap: 0.35rem;
+  background: #f3f4f6;
+  padding: 0.25rem 0.55rem;
   border-radius: 8px;
   font-size: 0.8rem;
-  color: #334155;
+  color: #4b5563;
 }
+
 .meta__item.id {
-  background: #fef3c7;
-  color: #92400e;
+  background: #eef2ff;
+  color: #3730a3;
 }
+
 .meta__label {
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
+  font-size: 0.72rem;
 }
 
-/* ========== DRAG ACTIVE GLOBAL FEEDBACK ========== */
-.board.drag-active {
-  outline: 3px dashed #60a5fa;
-  background: rgba(191, 219, 254, 0.2);
-  transition: background 0.2s ease;
-}
-
-/* Responsive tweaks */
-@media (max-width: 640px) {
-  .task-list {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ========== CARD ACTIONS ========== */
+/* ========== ACCIONES EN LA CARD ========== */
 .card-actions {
   display: flex;
   justify-content: flex-end;
-  margin-top: 10px;
+  margin-top: 0.65rem;
 }
 
 .btn-delete {
   background: #ef4444;
-  color: white;
+  color: #fef2f2;
   border: none;
-  border-radius: 8px;
-  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  padding: 0.45rem 1.1rem;
   font-weight: 600;
+  font-size: 0.8rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    background-color 0.18s ease, filter 0.18s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 18px rgba(239, 68, 68, 0.4);
 }
 
 .btn-delete:hover {
   background: #dc2626;
-  transform: scale(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(220, 38, 38, 0.5);
 }
 
 .btn-delete:active {
-  transform: scale(0.95);
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(220, 38, 38, 0.4);
 }
 
+/* ========== FEEDBACK GLOBAL DE DRAG ========== */
+.board.drag-active {
+  outline: 3px dashed rgba(91, 33, 255, 0.25);
+  background: rgba(226, 232, 240, 0.6);
+  transition: background 0.2s ease, outline-color 0.2s ease;
+}
+
+/* ========== BOTÓN VOLVER ========== */
+.volver-btn {
+  align-self: center;
+  margin-top: 2rem;
+  padding: 0.8rem 1.8rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #f9fafb;
+  background: linear-gradient(135deg, #5b21ff, #06b6d4);
+  border: none;
+  border-radius: 999px;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.18s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.volver-btn .arrow {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.volver-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 35px rgba(37, 99, 235, 0.45);
+  filter: brightness(1.03);
+}
+
+.volver-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.35);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 640px) {
+  .task-list {
+    grid-template-columns: 1fr;
+  }
+
+  .board {
+    padding: 1.5rem 1rem 2rem;
+  }
+
+  .volver-btn {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.88rem;
+    margin-top: 1.5rem;
+  }
+}

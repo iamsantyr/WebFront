@@ -87,6 +87,38 @@
   transform: translateY(-1px);
 }
 
+/* ========== MENSAJE DE ERROR (OPCIONAL EN EL FORM) ========== */
+.registro-card .error-message {
+  margin-top: 0.4rem;
+  background-color: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.85rem;
+  text-align: left;
+  line-height: 1.4;
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  animation: shakeIn 0.28s ease-out;
+}
+
+.registro-card .error-message::before {
+  content: "!";
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background-color: #fee2e2;
+  border: 1px solid #fecaca;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
 /* ========== BOTÓN ========== */
 button[type="submit"] {
   margin-top: 0.8rem;
@@ -174,6 +206,21 @@ button[type="submit"]:disabled {
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+/* ========== ANIMACIÓN ERROR ========== */
+@keyframes shakeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(0);
   }
 }
 

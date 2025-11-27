@@ -1,97 +1,167 @@
-/* Contenedor principal */
+/* ========== CONTENEDOR PRINCIPAL ========== */
 .eliminar-proceso-container {
+  min-height: 100vh;
   display: flex;
+  align-items: stretch;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: linear-gradient(135deg, #007bff, #00c6ff);
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 2rem 1rem;
+  background: #f4f5fb;
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* Tarjeta */
+/* ========== TARJETA ========== */
 .eliminar-proceso-card {
+  width: 100%;
+  max-width: 460px;
   background: #ffffff;
-  padding: 2rem 3rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-  width: 420px;
-  text-align: center;
-  animation: fadeIn 0.8s ease-in-out;
+  border-radius: 12px;
+  border: 1px solid #e2e5f2;
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.12);
+  padding: 2.1rem 2.3rem;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  animation: cardIn 0.6s ease-out;
 }
 
-/* Título */
+/* barra decorativa lateral */
+.eliminar-proceso-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.9rem;
+  bottom: 0.9rem;
+  width: 4px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #5b21ff, #06b6d4);
+}
+
+/* ========== TÍTULO ========== */
 .eliminar-proceso-card h2 {
-  color: #333;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
+  color: #111827;
+  font-weight: 700;
+  margin: 0 0 0.9rem;
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
 }
 
-/* Texto de confirmación */
+/* ========== TEXTO DE CONFIRMACIÓN ========== */
 .confirmacion-texto {
-  color: #555;
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
+  color: #4b5563;
+  font-size: 0.95rem;
+  margin: 0 0 0.8rem;
+  line-height: 1.5;
 }
 
-/* Estado del proceso */
+/* ========== ESTADO DEL PROCESO ========== */
 .estado-proceso {
-  margin-top: 1rem;
-  font-size: 0.95rem;
-  color: #007bff;
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  color: #5b21ff;
   font-weight: 500;
 }
 
-/* Botones */
+/* ========== BOTONES ========== */
 .boton-accion {
   display: flex;
-  justify-content: space-between;
-  margin-top: 1.5rem;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.6rem;
 }
 
-button {
+/* estilo base para botones dentro de la tarjeta */
+.eliminar-proceso-card button {
   flex: 1;
-  padding: 0.8rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 999px;
+  padding: 0.75rem 1.4rem;
   font-weight: 600;
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  margin: 0 0.5rem;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.18s ease,
+    background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
+/* Botón eliminar (peligro) */
 .btn-eliminar {
-  background-color: #dc3545;
-  color: #fff;
+  background: #ef4444;
+  color: #fef2f2;
+  box-shadow: 0 8px 18px rgba(239, 68, 68, 0.4);
 }
 
 .btn-eliminar:hover {
-  background-color: #b02a37;
+  background: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(220, 38, 38, 0.5);
 }
 
+.btn-eliminar:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(220, 38, 38, 0.4);
+}
+
+/* Botón cancelar (secundario) */
 .btn-cancelar {
-  background-color: #6c757d;
-  color: #fff;
+  background-color: #ffffff;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  box-shadow: none;
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 .btn-cancelar:hover {
-  background-color: #565e64;
+  background-color: #f3f4f6;
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
 }
 
-/* Mensaje de confirmación */
+.btn-cancelar:active {
+  background-color: #e5e7eb;
+}
+
+/* ========== MENSAJE DE CONFIRMACIÓN / ESTADO EXTRA ========== */
 .mensaje {
-  margin-top: 1.5rem;
-  color: #28a745;
+  margin-top: 1.2rem;
+  color: #16a34a;
   font-weight: 500;
+  font-size: 0.9rem;
 }
 
-/* Animación */
-@keyframes fadeIn {
+/* ========== ANIMACIONES ========== */
+@keyframes cardIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px) scale(0.98);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 480px) {
+  .eliminar-proceso-card {
+    padding: 1.7rem 1.4rem 1.9rem;
+    border-radius: 0.75rem;
+  }
+
+  .eliminar-proceso-card h2 {
+    font-size: 1.35rem;
+  }
+
+  .boton-accion {
+    flex-direction: column-reverse;
+  }
+
+  .eliminar-proceso-card button {
+    width: 100%;
   }
 }
