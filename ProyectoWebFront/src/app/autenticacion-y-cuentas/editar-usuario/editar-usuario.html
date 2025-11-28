@@ -1,64 +1,134 @@
-<div class="registro-container">
-  <div class="registro-card">
-    <h2>Modificar usuario</h2>
+<div class="user-page">
+  <div class="user-shell">
+    <!-- LADO IZQUIERDO: contexto / branding -->
+    <section class="user-brand">
+      <div class="brand-content">
+        <h1 class="brand-title">Perfil de usuario</h1>
+        <p class="brand-subtitle">
+          Actualiza los datos del usuario para mantener alineados accesos y procesos.
+        </p>
 
-    <form (ngSubmit)="onModificarUsuario()" #usuarioForm="ngForm">
-      <div class="input-group">
-        <label for="name">Nombre completo</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          [(ngModel)]="usuarioDto.name"
-          required
-          placeholder="Ej: Juan Pérez"
-        />
+        <ul class="brand-highlights">
+          <li>✓ Modifica nombre y correo principal</li>
+          <li>✓ Cambia la contraseña si es necesario</li>
+          <li>✓ Ajusta la organización asociada</li>
+        </ul>
       </div>
 
-      <div class="input-group">
-        <label for="email">Correo electrónico</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          [(ngModel)]="usuarioDto.email"
-          required
-          placeholder="usuario@correo.com"
-        />
+      <div class="brand-footer">
+        <p class="brand-hint">
+          Recuerda: el correo debe ser único en el sistema.
+        </p>
+        <button type="button" class="brand-home" routerLink="/home">
+          ← Volver al inicio
+        </button>
       </div>
+    </section>
 
-      <div class="input-group">
-        <label for="password">Nueva contraseña (opcional)</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          [(ngModel)]="usuarioDto.password"
-          placeholder="Deja vacío si no deseas cambiarla"
-        />
-      </div>
+    <!-- LADO DERECHO: formulario -->
+    <section class="user-panel">
+      <header class="user-header">
+        <h2>Modificar usuario</h2>
+        <p>
+          Revisa los datos del usuario y actualiza solo lo que sea necesario.
+        </p>
+      </header>
 
-      <div class="input-group">
-        <label for="organizationId">ID de organización</label>
-        <input
-          type="number"
-          id="organizationId"
-          name="organizationId"
-          [(ngModel)]="usuarioDto.organizationId"
-          required
-          min="1"
-          placeholder="Ej: 900123456"
-        />
-      </div>
+      <form
+        (ngSubmit)="onModificarUsuario()"
+        #usuarioForm="ngForm"
+        novalidate
+        class="user-form"
+      >
+        <!-- Nombre -->
+        <div class="field">
+          <label for="name">Nombre completo</label>
+          <div class="field-control">
+            <span class="field-icon" aria-hidden="true"></span>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              [(ngModel)]="usuarioDto.name"
+              required
+              placeholder="Ej: Juan Pérez"
+            />
+          </div>
+        </div>
 
-      <button type="submit" [disabled]="usuarioForm.invalid">
-        Guardar cambios
-      </button>
+        <!-- Email -->
+        <div class="field">
+          <label for="email">Correo electrónico</label>
+          <div class="field-control">
+            <span class="field-icon" aria-hidden="true"></span>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              [(ngModel)]="usuarioDto.email"
+              required
+              placeholder="usuario@correo.com"
+            />
+          </div>
+          <p class="field-hint">
+            Este correo se usará para ingresar al sistema.
+          </p>
+        </div>
 
-      <p class="login-text">
-        ¿Deseas volver?
-        <a routerLink="/home">Regresar al inicio</a>
-      </p>
-    </form>
+        <!-- Password opcional -->
+        <div class="field">
+          <label for="password">Nueva contraseña (opcional)</label>
+          <div class="field-control">
+            <span class="field-icon" aria-hidden="true"></span>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              [(ngModel)]="usuarioDto.password"
+              placeholder="Deja vacío si no deseas cambiarla"
+            />
+          </div>
+          <p class="field-hint">
+            Si no escribes nada aquí, la contraseña actual se mantendrá.
+          </p>
+        </div>
+
+        <!-- Organización -->
+        <div class="field">
+          <label for="organizationId">ID de organización</label>
+          <div class="field-control">
+            <span class="field-icon" aria-hidden="true"></span>
+            <input
+              type="number"
+              id="organizationId"
+              name="organizationId"
+              [(ngModel)]="usuarioDto.organizationId"
+              required
+              min="1"
+              placeholder="Ej: 900123456"
+            />
+          </div>
+        </div>
+
+        <!-- Acciones -->
+        <div class="user-actions">
+          <button
+            type="submit"
+            [disabled]="usuarioForm.invalid"
+          >
+            Guardar cambios
+          </button>
+        </div>
+      </form>
+
+      <footer class="user-footer">
+        <p>
+          ¿Deseas volver sin guardar?
+          <button type="button" class="text-link" routerLink="/home">
+            Regresar al inicio
+          </button>
+        </p>
+      </footer>
+    </section>
   </div>
 </div>

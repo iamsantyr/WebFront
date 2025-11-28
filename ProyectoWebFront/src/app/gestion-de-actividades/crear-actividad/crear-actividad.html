@@ -1,69 +1,118 @@
-<div class="crear-container">
-  <div class="card">
-    <h2>Crear Actividad</h2>
-    <p class="subtitle">Completa la información para registrar una nueva actividad dentro de un proceso.</p>
+<div class="activity-create-page">
+  <div class="activity-shell">
+    <!-- LADO IZQUIERDO: contexto / texto -->
+    <section class="activity-aside">
+      <div class="aside-content">
+        <h1 class="aside-title">Nueva actividad</h1>
+        <p class="aside-subtitle">
+          Define las tareas que harán parte de tus procesos y controla mejor el flujo de trabajo.
+        </p>
 
-    <form [formGroup]="form" (ngSubmit)="guardar()" novalidate>
-      <!-- Nombre -->
-      <div class="field">
-        <label for="name">Nombre de la Actividad</label>
-        <input
-          id="name"
-          type="text"
-          formControlName="name"
-          placeholder="Ej: Verificar documentos"
-        />
-        <small class="err" *ngIf="c('name').touched && c('name').invalid">
-          El nombre es obligatorio (mínimo 2 caracteres).
-        </small>
+        <ul class="aside-highlights">
+          <li>✓ Asigna un nombre claro y un tipo de actividad</li>
+          <li>✓ Describe su función dentro del proceso</li>
+          <li>✓ Opcionalmente configura su posición en el diagrama</li>
+        </ul>
       </div>
 
-      <!-- Tipo -->
-      <div class="field">
-        <label for="type">Tipo de Actividad</label>
-        <select id="type" formControlName="type">
-          <option value="" disabled selected>Seleccione un tipo</option>
-          <option *ngFor="let t of tipos" [value]="t">{{ t | titlecase }}</option>
-        </select>
-        <small class="err" *ngIf="c('type').touched && c('type').invalid">
-          El tipo es obligatorio.
-        </small>
-      </div>
-
-      <!-- Descripción -->
-      <div class="field">
-        <label for="description">Descripción</label>
-        <textarea
-          id="description"
-          rows="3"
-          formControlName="description"
-          placeholder="Describe brevemente la actividad (opcional)"
-        ></textarea>
-      </div>
-
-      <!-- Coordenadas -->
-      <div class="grid-2">
-        <div class="field">
-          <label for="x">Posición X</label>
-          <input id="x" type="number" formControlName="x" />
-        </div>
-
-        <div class="field">
-          <label for="y">Posición Y</label>
-          <input id="y" type="number" formControlName="y" />
-        </div>
-      </div>
-
-      <!-- Mensaje de error global -->
-      <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
-
-      <!-- Botones -->
-      <div class="actions">
-        <button class="btn guardar-btn" type="submit" [disabled]="loading">
-          {{ loading ? 'Guardando...' : 'Guardar' }}
+      <div class="aside-footer">
+        <p class="aside-hint">¿Prefieres revisar las existentes?</p>
+        <button type="button" class="aside-link" (click)="cancelar()">
+          Volver a consulta
         </button>
-        <button class="btn cancelar-btn" type="button" (click)="cancelar()">Cancelar</button>
       </div>
-    </form>
+    </section>
+
+    <!-- LADO DERECHO: formulario -->
+    <section class="activity-panel">
+      <header class="activity-header">
+        <h2>Crear actividad</h2>
+        <p>
+          Completa la información para registrar una nueva actividad dentro de un proceso.
+        </p>
+      </header>
+
+      <form [formGroup]="form" (ngSubmit)="guardar()" novalidate class="activity-form">
+        <!-- Nombre -->
+        <div class="field">
+          <label for="name">Nombre de la actividad</label>
+          <div class="field-control">
+            <span class="field-icon" aria-hidden="true"></span>
+            <input
+              id="name"
+              type="text"
+              formControlName="name"
+              placeholder="Ej: Verificar documentos"
+            />
+          </div>
+          <small class="err" *ngIf="c('name').touched && c('name').invalid">
+            El nombre es obligatorio (mínimo 2 caracteres).
+          </small>
+        </div>
+
+        <!-- Tipo -->
+        <div class="field">
+          <label for="type">Tipo de actividad</label>
+          <div class="field-control select-wrapper">
+            <span class="field-icon" aria-hidden="true"></span>
+            <select id="type" formControlName="type">
+              <option value="" disabled selected>Seleccione un tipo</option>
+              <option *ngFor="let t of tipos" [value]="t">{{ t | titlecase }}</option>
+            </select>
+          </div>
+          <small class="err" *ngIf="c('type').touched && c('type').invalid">
+            El tipo es obligatorio.
+          </small>
+        </div>
+
+        <!-- Descripción -->
+        <div class="field">
+          <label for="description">Descripción</label>
+          <div class="field-control textarea-wrapper">
+            <span class="field-icon" aria-hidden="true"></span>
+            <textarea
+              id="description"
+              rows="3"
+              formControlName="description"
+              placeholder="Describe brevemente la actividad (opcional)"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Coordenadas -->
+        <div class="grid-2">
+          <div class="field">
+            <label for="x">Posición X</label>
+            <div class="field-control">
+              <span class="field-icon" aria-hidden="true">↔</span>
+              <input id="x" type="number" formControlName="x" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="y">Posición Y</label>
+            <div class="field-control">
+              <span class="field-icon" aria-hidden="true">↕</span>
+              <input id="y" type="number" formControlName="y" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Mensaje de error global -->
+        <div class="error-message" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+
+        <!-- Botones -->
+        <div class="actions">
+          <button class="btn primary-btn" type="submit" [disabled]="loading">
+            {{ loading ? 'Guardando...' : 'Guardar' }}
+          </button>
+          <button class="btn secondary-btn" type="button" (click)="cancelar()">
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </section>
   </div>
 </div>

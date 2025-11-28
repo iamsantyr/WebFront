@@ -1,36 +1,135 @@
-<div class="usuarios-container">
-  <h2 class="title">Lista de Usuarios</h2>
+<div class="user-list-page">
+  <div class="user-list-shell">
+    <!-- LADO IZQUIERDO: branding / contexto -->
+    <section class="user-list-brand">
+      <div class="brand-content">
+        <h1 class="brand-title">Usuarios del sistema</h1>
+        <p class="brand-subtitle">
+          Administra las cuentas que pueden acceder y operar los procesos.
+        </p>
 
-  <div *ngIf="errorMessage" class="error-message">
-    {{ errorMessage }}
-  </div>
-
-  <div *ngIf="!loading && usuarios.length === 0" class="empty">
-    No hay usuarios registrados.
-  </div>
-
-  <div *ngIf="loading" class="loading">Cargando usuarios...</div>
-
-  <div class="usuarios-grid" *ngIf="usuarios.length > 0 && !loading">
-    <div class="usuario-card" *ngFor="let user of usuarios">
-      <div class="card-header">
-        <h3>{{ user.name || 'Sin nombre' }}</h3>
-        <span class="badge">ID {{ user.id }}</span>
+        <ul class="brand-highlights">
+          <li>✓ Revisa rápidamente nombre, correo y organización</li>
+          <li>✓ Elimina cuentas que ya no se usen</li>
+          <li>✓ Mantén tu plataforma bajo control</li>
+        </ul>
       </div>
 
-      <div class="card-body">
-        <p><strong>Email:</strong> {{ user.email || '—' }}</p>
-        <p><strong>Contraseña:</strong> {{ user.password || '—' }}</p>
-        <p><strong>Organización:</strong> {{ user.organizationId ?? '—' }}</p>
+      <div class="brand-footer">
+        <p class="brand-hint">
+          Usuarios cargados:
+          <strong>{{ usuarios.length }}</strong>
+        </p>
+
+        <div class="brand-actions">
+          <button
+            type="button"
+            class="brand-refresh"
+            (click)="cargarUsuarios()"
+            [disabled]="loading"
+          >
+            {{ loading ? 'Actualizando…' : 'Recargar lista' }}
+          </button>
+
+          <button
+            type="button"
+            class="brand-home"
+            (click)="volver()"
+          >
+            ← Volver al inicio
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- LADO DERECHO: listado -->
+    <section class="user-list-panel">
+      <header class="user-list-header">
+        <h2>Lista de Usuarios</h2>
+        <p>Consulta y gestiona los usuarios registrados en el sistema.</p>
+      </header>
+
+      <!-- Estados -->
+      <div class="state-wrapper">
+        <div *ngIf="loading" class="state state--loading">
+          Cargando usuarios…
+        </div>
+
+        <div *ngIf="errorMessage" class="state state--error">
+          {{ errorMessage }}
+        </div>
+
+        <div
+          *ngIf="!loading && !errorMessage && usuarios.length === 0"
+          class="state state--empty"
+        >
+          No hay usuarios registrados por el momento.
+        </div>
       </div>
 
-      <div class="card-actions">
-        <button class="btn-delete" (click)="eliminarUsuario(user.id)">
-          Eliminar
+      <!-- GRID DE USUARIOS -->
+      <div
+        class="user-list-grid"
+        *ngIf="usuarios.length > 0 && !loading"
+      >
+        <article
+          class="user-card"
+          *ngFor="let user of usuarios"
+        >
+          <header class="user-card-header">
+            <div>
+              <h3 class="user-card-title">
+                {{ user.name || 'Sin nombre' }}
+              </h3>
+              <p class="user-card-subtitle">
+                {{ user.email || 'Sin correo' }}
+              </p>
+            </div>
+            <span class="user-card-badge">
+              ID {{ user.id }}
+            </span>
+          </header>
+
+          <div class="user-card-body">
+            <p class="user-card-row">
+              <span class="label">Correo</span>
+              <span class="value">{{ user.email || '—' }}</span>
+            </p>
+
+            <p class="user-card-row">
+              <span class="label">Contraseña</span>
+              <span class="value">{{ user.password || '—' }}</span>
+            </p>
+
+            <p class="user-card-row">
+              <span class="label">Organización</span>
+              <span class="value">{{ user.organizationId ?? '—' }}</span>
+            </p>
+          </div>
+
+          <footer class="user-card-actions">
+            <button
+              type="button"
+              class="btn-delete"
+              (click)="eliminarUsuario(user.id)"
+              [disabled]="loading"
+            >
+              Eliminar
+            </button>
+          </footer>
+        </article>
+      </div>
+
+      <!-- BOTÓN VOLVER (MÓVIL / EXTRA) -->
+      <div class="user-list-footer">
+        <button
+          type="button"
+          class="back-btn"
+          (click)="volver()"
+        >
+          ← Volver
         </button>
       </div>
-    </div>
+    </section>
   </div>
-
-  <button class="btn-volver" (click)="volver()">← Volver</button>
 </div>

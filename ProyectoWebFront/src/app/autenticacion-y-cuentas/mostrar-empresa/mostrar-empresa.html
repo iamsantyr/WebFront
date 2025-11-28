@@ -1,34 +1,124 @@
-<div class="empresas-container">
-  <h2 class="title">Lista de Empresas</h2>
-  <div *ngIf="errorMessage" class="error-message">
-    {{ errorMessage }}
-  </div>
+<div class="org-list-page">
+  <div class="org-list-shell">
+    <!-- LADO IZQUIERDO: branding / contexto -->
+    <section class="org-list-brand">
+      <div class="brand-content">
+        <h1 class="brand-title">Empresas registradas</h1>
+        <p class="brand-subtitle">
+          Consulta y gestiona las empresas asociadas a tus procesos.
+        </p>
 
-  <div *ngIf="!loading && empresas.length === 0" class="empty">
-    No hay empresas registradas.
-  </div>
-
-  <div *ngIf="loading" class="loading">Cargando empresas...</div>
-
-  <div class="empresas-grid" *ngIf="empresas.length > 0 && !loading">
-    <div class="empresa-card" *ngFor="let emp of empresas">
-      <div class="card-header">
-        <h3>{{ emp.name || 'Sin nombre' }}</h3>
+        <ul class="brand-highlights">
+          <li>✓ Visualiza rápidamente nombre, NIT y correo</li>
+          <li>✓ Elimina registros que ya no se utilicen</li>
+          <li>✓ Mantén limpio el catálogo de organizaciones</li>
+        </ul>
       </div>
 
-      <div class="card-body">
-        <p><strong>Nombre:</strong> {{ emp.name || '—' }}</p>
-        <p><strong>NIT:</strong> {{ emp.nit || '—' }}</p>
-        <p><strong>Email:</strong> {{ emp.email || '—' }}</p>
+      <div class="brand-footer">
+        <p class="brand-hint">
+          Total de empresas cargadas:
+          <strong>{{ empresas.length }}</strong>
+        </p>
+
+        <div class="brand-actions">
+          <button
+            type="button"
+            class="brand-refresh"
+            (click)="cargarEmpresas()"
+            [disabled]="loading"
+          >
+            {{ loading ? 'Actualizando…' : 'Recargar lista' }}
+          </button>
+
+          <button
+            type="button"
+            class="brand-home"
+            (click)="volver()"
+          >
+            ← Volver al inicio
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- LADO DERECHO: listado -->
+    <section class="org-list-panel">
+      <header class="org-list-header">
+        <h2>Lista de Empresas</h2>
+        <p>Gestiona aquí las organizaciones registradas en el sistema.</p>
+      </header>
+
+      <!-- Estados -->
+      <div class="state-wrapper">
+        <div *ngIf="loading" class="state state--loading">
+          Cargando empresas…
+        </div>
+
+        <div *ngIf="errorMessage" class="state state--error">
+          {{ errorMessage }}
+        </div>
+
+        <div
+          *ngIf="!loading && !errorMessage && empresas.length === 0"
+          class="state state--empty"
+        >
+          No hay empresas registradas por el momento.
+        </div>
       </div>
 
-      <div class="card-actions">
-        <button class="btn-delete" (click)="eliminarEmpresa(emp.id)">
-          Eliminar
+      <!-- GRID DE EMPRESAS -->
+      <div
+        class="org-list-grid"
+        *ngIf="empresas.length > 0 && !loading"
+      >
+        <article
+          class="org-card"
+          *ngFor="let emp of empresas"
+        >
+          <header class="org-card-header">
+            <h3 class="org-card-title">
+              {{ emp.name || 'Sin nombre' }}
+            </h3>
+            <span class="org-card-badge">
+              NIT {{ emp.nit || '—' }}
+            </span>
+          </header>
+
+          <div class="org-card-body">
+            <p class="org-card-row">
+              <span class="label">Nombre</span>
+              <span class="value">{{ emp.name || '—' }}</span>
+            </p>
+            <p class="org-card-row">
+              <span class="label">Correo</span>
+              <span class="value">{{ emp.email || '—' }}</span>
+            </p>
+          </div>
+
+          <footer class="org-card-actions">
+            <button
+              type="button"
+              class="btn-delete"
+              (click)="eliminarEmpresa(emp.id)"
+              [disabled]="loading"
+            >
+              Eliminar
+            </button>
+          </footer>
+        </article>
+      </div>
+
+      <!-- BOTÓN VOLVER (MÓVIL / EXTRA) -->
+      <div class="org-list-footer">
+        <button
+          type="button"
+          class="back-btn"
+          (click)="volver()"
+        >
+          ← Volver
         </button>
       </div>
-    </div>
+    </section>
   </div>
-
-  <button class="btn-volver" (click)="volver()">← Volver</button>
 </div>

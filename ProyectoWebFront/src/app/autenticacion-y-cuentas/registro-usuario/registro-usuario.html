@@ -1,66 +1,131 @@
-<!-- persona-form.html -->
-<div class="registro-container">
-  <div class="registro-card">
-    <h2>Registro de persona</h2>
+<div class="user-register-page">
+  <div class="user-register-shell">
+    <!-- LADO IZQUIERDO: branding / contexto -->
+    <section class="user-register-brand">
+      <div class="brand-content">
+        <h1 class="brand-title">Crea tu cuenta</h1>
+        <p class="brand-subtitle">
+          Registra tu usuario para acceder a los procesos y herramientas de tu organización.
+        </p>
 
-    <form (ngSubmit)="onRegistrarPersona()" #personaForm="ngForm">
-      <div class="input-group">
-        <label for="name">Nombre completo</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          [(ngModel)]="usuarioDto.name"
-          required
-          placeholder="Ej: Juan Pérez"
-        />
+        <ul class="brand-highlights">
+          <li>✓ Un solo usuario para todos tus procesos</li>
+          <li>✓ Asociado a la organización que definas</li>
+          <li>✓ Ideal para analistas, supervisores y administradores</li>
+        </ul>
       </div>
 
-      <div class="input-group">
-        <label for="email">Correo electrónico</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          [(ngModel)]="usuarioDto.email"
-          required
-          placeholder="usuario@correo.com"
-        />
+      <div class="brand-footer">
+        <p class="brand-hint">¿Ya tienes usuario creado?</p>
+        <a class="brand-login" routerLink="/login">
+          Ir a iniciar sesión
+        </a>
       </div>
+    </section>
 
-      <div class="input-group">
-        <label for="password">Contraseña</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          [(ngModel)]="usuarioDto.password"
-          required
-          placeholder="Mín. 8 caracteres"
-        />
-      </div>
+    <!-- LADO DERECHO: formulario -->
+    <section class="user-register-panel">
+      <header class="user-register-header">
+        <h2>Registro de persona</h2>
+        <p>
+          Completa tus datos para crear una cuenta vinculada a una organización.
+        </p>
+      </header>
 
-      <div class="input-group">
-        <label for="organizationId">ID de organización</label>
-        <input
-          type="number"
-          id="organizationId"
-          name="organizationId"
-          [(ngModel)]="usuarioDto.organizationId"
-          required
-          min="1"
-          placeholder="Ej: 900123456"
-        />
-      </div>
+      <form
+        (ngSubmit)="onRegistrarPersona()"
+        #personaForm="ngForm"
+        novalidate
+        class="user-register-form"
+      >
+        <!-- Nombre completo -->
+        <div class="field">
+          <label for="name">Nombre completo</label>
+          <div class="field-control">
+            <span class="field-icon" aria-hidden="true"></span>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              [(ngModel)]="usuarioDto.name"
+              required
+              placeholder="Ej: Juan Pérez"
+            />
+          </div>
+        </div>
 
-      <button type="submit" [disabled]="personaForm.invalid">
-        Registrar persona
-      </button>
+        <!-- Correo -->
+        <div class="field">
+          <label for="email">Correo electrónico</label>
+          <div class="field-control">
+            <span class="field-icon" aria-hidden="true"></span>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              [(ngModel)]="usuarioDto.email"
+              required
+              placeholder="usuario@correo.com"
+            />
+          </div>
+        </div>
 
-      <p class="login-text">
-        ¿Ya tienes una cuenta?
-        <a routerLink="/login">Inicia sesión aquí</a>
-      </p>
-    </form>
+        <!-- Contraseña -->
+        <div class="field">
+          <label for="password">Contraseña</label>
+          <div class="field-control">
+            <span class="field-icon" aria-hidden="true"></span>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              [(ngModel)]="usuarioDto.password"
+              required
+              placeholder="Mín. 8 caracteres"
+            />
+          </div>
+          <p class="field-hint">
+            Usa una contraseña segura que solo tú conozcas.
+          </p>
+        </div>
+
+        <!-- Organización -->
+        <div class="field">
+          <label for="organizationId">ID de organización</label>
+          <div class="field-control">
+            <span class="field-icon" aria-hidden="true"></span>
+            <input
+              type="number"
+              id="organizationId"
+              name="organizationId"
+              [(ngModel)]="usuarioDto.organizationId"
+              required
+              min="1"
+              placeholder="Ej: 900123456"
+            />
+          </div>
+          <p class="field-hint">
+            Este ID debe corresponder a la empresa con la que trabajarás.
+          </p>
+        </div>
+
+        <!-- Botón -->
+        <div class="actions">
+          <button
+            type="submit"
+            [disabled]="personaForm.invalid"
+          >
+            Registrar persona
+          </button>
+        </div>
+
+        <footer class="user-register-footer">
+          <p>
+            ¿Ya tienes una cuenta?
+            <a routerLink="/login" class="text-link">Inicia sesión aquí</a>
+          </p>
+        </footer>
+      </form>
+    </section>
   </div>
 </div>

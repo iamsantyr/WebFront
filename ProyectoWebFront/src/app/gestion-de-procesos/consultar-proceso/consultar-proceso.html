@@ -1,42 +1,102 @@
-<div class="procesos-container">
-  <h2 class="title">Lista de Procesos</h2>
-  <div *ngIf="errorMessage" class="error-message">
-    {{ errorMessage }}
-  </div>
-
-  <div *ngIf="!loading && procesos.length === 0" class="empty">
-    No hay procesos registrados.
-  </div>
-
-  <div *ngIf="loading" class="loading">Cargando procesos...</div>
-
-  <div class="procesos-grid" *ngIf="procesos.length > 0 && !loading">
-    <div class="proceso-card" *ngFor="let proc of procesos">
-      <div class="card-header">
-        <h3>{{ proc.name || 'Sin nombre' }}</h3>
-        <span class="badge">ID {{ proc.id }}</span>
+<div class="process-board">
+  <header class="board-header">
+    <div class="board-title-group">
+      <div class="board-icon">
+        <span>⚙</span>
       </div>
-
-      <div class="card-body">
-        <p><strong>Descripción:</strong> {{ proc.description || '—' }}</p>
-        <p><strong>Categoría:</strong> {{ proc.category || '—' }}</p>
-        <p><strong>Estado:</strong> {{ proc.status }}</p>
-        <p><strong>Organización:</strong>
-             {{ proc.organizationId !== null ? proc.organizationId : '—' }}</p>
-
-        <div class="subdata">
-        <p><strong>Actividades:</strong> {{ proc.activityIds?.length ?? 0 }}</p>
-        <p><strong>Arcos:</strong> {{ proc.archIds?.length ?? 0 }}</p>
-        <p><strong>Gateways:</strong> {{ proc.gatewayIds?.length ?? 0 }}</p>
-        </div>
-
-      </div>
-
-      <div class="card-actions">
-        <button class="btn-delete" (click)="eliminarProceso(proc.id)">Eliminar</button>
+      <div>
+        <h2 class="title">Procesos registrados</h2>
+        <p class="subtitle">
+          Revisa el estado de cada proceso y elimina los que ya no necesites.
+        </p>
       </div>
     </div>
-  </div>
+  </header>
 
-  <button class="btn-volver" (click)="volver()">← Volver</button>
+  <!-- Estado / mensajes -->
+  <section class="status-wrapper">
+    <div *ngIf="loading" class="pill pill--loading">
+      Cargando procesos…
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert--error">
+      {{ errorMessage }}
+    </div>
+
+    <div
+      *ngIf="!loading && !errorMessage && procesos.length === 0"
+      class="empty-state"
+    >
+      <h3>No hay procesos registrados</h3>
+      <p>
+        Aún no se ha creado ningún proceso. Cuando registres uno, aparecerá en
+        este panel.
+      </p>
+    </div>
+  </section>
+
+  <!-- Grid de procesos -->
+  <section
+    class="process-grid"
+    *ngIf="!loading && procesos.length > 0"
+  >
+    <article class="process-card" *ngFor="let proc of procesos">
+      <header class="card-header">
+        <div>
+          <h3 class="card-title">{{ proc.name || 'Sin nombre' }}</h3>
+          <p class="card-subtitle">
+            {{ proc.category || 'Sin categoría' }}
+          </p>
+        </div>
+        <span class="badge">ID {{ proc.id }}</span>
+      </header>
+
+      <p class="description">
+        {{ proc.description || 'Sin descripción disponible.' }}
+      </p>
+
+      <div class="meta">
+        <div class="meta__item">
+          <span class="meta__label">Estado</span>
+          <span class="meta__value">{{ proc.status || '—' }}</span>
+        </div>
+        <div class="meta__item">
+          <span class="meta__label">Org.</span>
+          <span class="meta__value">
+            {{ proc.organizationId !== null ? proc.organizationId : '—' }}
+          </span>
+        </div>
+      </div>
+
+      <div class="meta meta--secondary">
+        <div class="meta__chip">
+          <span class="chip-label">Actividades</span>
+          <span class="chip-value">{{ proc.activityIds?.length ?? 0 }}</span>
+        </div>
+        <div class="meta__chip">
+          <span class="chip-label">Arcos</span>
+          <span class="chip-value">{{ proc.archIds?.length ?? 0 }}</span>
+        </div>
+        <div class="meta__chip">
+          <span class="chip-label">Gateways</span>
+          <span class="chip-value">{{ proc.gatewayIds?.length ?? 0 }}</span>
+        </div>
+      </div>
+
+      <footer class="card-actions">
+        <button
+          type="button"
+          class="btn-delete"
+          (click)="eliminarProceso(proc.id)"
+        >
+          Eliminar
+        </button>
+      </footer>
+    </article>
+  </section>
+
+  <button class="btn-back" type="button" (click)="volver()">
+    <span class="arrow">←</span>
+    Volver al inicio
+  </button>
 </div>

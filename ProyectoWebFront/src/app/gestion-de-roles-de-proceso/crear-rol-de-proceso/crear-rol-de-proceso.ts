@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ProcessRoleService, ProcessRoleDto } from '../../services/process-role.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-rol-de-proceso',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './crear-rol-de-proceso.html',
   styleUrl: './crear-rol-de-proceso.css'
 })
@@ -14,7 +15,7 @@ export class CrearRolDeProceso {
   nombreRol: string = '';
   descripcion: string = '';
   organizacionId: number | null = null;
-  
+
   loading: boolean = false;
   errorMessage: string = '';
   successMessage: string = '';
@@ -30,7 +31,7 @@ export class CrearRolDeProceso {
     this.loading = true;
 
     if (!this.nombreRol || !this.descripcion) {
-      this.errorMessage = 'Por favor complete todos los campos obligatorios';
+      this.errorMessage = 'Por favor completa todos los campos obligatorios.';
       this.loading = false;
       return;
     }
@@ -44,18 +45,18 @@ export class CrearRolDeProceso {
     this.processRoleService.crear(role).subscribe({
       next: (response) => {
         console.log('Rol creado exitosamente:', response);
-        this.successMessage = 'Rol creado exitosamente';
+        this.successMessage = 'Rol creado exitosamente.';
         this.loading = false;
-        
-        // Limpiar formulario y redirigir
+
         setTimeout(() => {
           this.limpiarFormulario();
-          // Aquí podrías redirigir a una página de lista de roles si existe
-        }, 2000);
+          // Si quieres redirigir, descomenta:
+          // this.router.navigate(['/lista-roles']);
+        }, 1500);
       },
       error: (error) => {
         console.error('Error al crear rol:', error);
-        this.errorMessage = 'Error al crear el rol. Intente nuevamente.';
+        this.errorMessage = 'Error al crear el rol. Intenta nuevamente.';
         this.loading = false;
       }
     });

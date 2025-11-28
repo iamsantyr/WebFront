@@ -1,1 +1,102 @@
-<p>editar-rol-de-proceso works!</p>
+<div class="role-wrapper">
+  <div class="role-card">
+    <!-- HEADER -->
+    <header class="role-header">
+      <h1>Editar rol de proceso</h1>
+      <p>
+        Actualiza la información de un rol existente para mantener tus procesos organizados.
+      </p>
+
+      <!-- ID del rol (solo se ve si existe) -->
+      <div class="id-pill" [hidden]="roleId === null">
+        ID del rol: <span>#{{ roleId }}</span>
+      </div>
+    </header>
+
+    <!-- CUERPO -->
+    <section class="role-body">
+      <!-- Estado de carga -->
+      <div class="loading-pill" [hidden]="!loading">
+        Cargando información del rol...
+      </div>
+
+      <!-- Mensaje de error -->
+      <div class="alert error" [hidden]="!errorMessage">
+        <span class="icon">!</span>
+        <p>{{ errorMessage }}</p>
+      </div>
+
+      <!-- Mensaje de éxito -->
+      <div class="alert success" [hidden]="!successMessage">
+        <span class="icon">✓</span>
+        <p>{{ successMessage }}</p>
+      </div>
+
+      <!-- FORMULARIO -->
+      <form (ngSubmit)="guardarCambios()" #rolForm="ngForm" novalidate>
+        <!-- Nombre -->
+        <div class="input-group">
+          <label for="nombreRol">Nombre del rol</label>
+          <input
+            type="text"
+            id="nombreRol"
+            name="nombreRol"
+            [(ngModel)]="nombreRol"
+            required
+            placeholder="Ej: Analista, Supervisor, Auditor"
+            [disabled]="loading"
+          />
+        </div>
+
+        <!-- Descripción -->
+        <div class="input-group">
+          <label for="descripcion">Descripción</label>
+          <textarea
+            id="descripcion"
+            name="descripcion"
+            [(ngModel)]="descripcion"
+            required
+            placeholder="Describe brevemente las funciones del rol"
+            rows="4"
+            [disabled]="loading"
+          ></textarea>
+        </div>
+
+        <!-- Organización (opcional) -->
+        <div class="input-group">
+          <label for="organizacionId">ID de organización (opcional)</label>
+          <input
+            type="number"
+            id="organizacionId"
+            name="organizacionId"
+            [(ngModel)]="organizacionId"
+            min="1"
+            placeholder="Ej: 900123456"
+            [disabled]="loading"
+          />
+          <small>Si lo dejas vacío, se mantendrá sin organización vinculada.</small>
+        </div>
+
+        <!-- BOTONES -->
+        <div class="button-row">
+          <button
+            type="button"
+            class="btn secondary"
+            (click)="cancelar()"
+            [disabled]="loading"
+          >
+            Cancelar
+          </button>
+
+          <button
+            type="submit"
+            class="btn primary"
+            [disabled]="rolForm.invalid || loading"
+          >
+            {{ loading ? 'Guardando cambios...' : 'Guardar cambios' }}
+          </button>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>

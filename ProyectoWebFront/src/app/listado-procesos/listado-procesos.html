@@ -1,1 +1,99 @@
-<p>listado-procesos works!</p>
+<div class="listado-container">
+  <header class="listado-header">
+    <h2>Procesos registrados</h2>
+    <p>Consulta, edita o elimina los procesos existentes en el sistema.</p>
+  </header>
+
+  <!-- Mensajes de estado -->
+  @if (errorMessage) {
+    <div class="alert error">
+      {{ errorMessage }}
+    </div>
+  }
+
+  @if (loading) {
+    <div class="state-text">Cargando procesos...</div>
+  }
+
+  @if (!loading && procesos.length === 0) {
+    <div class="empty">
+      No se encontraron procesos registrados.
+    </div>
+  }
+
+  <!-- Tabla de procesos -->
+  @if (!loading && procesos.length > 0) {
+    <section class="tabla-card">
+      <div class="tabla-header">
+        <span class="tabla-title">Listado de procesos</span>
+        <button type="button" class="refresh-btn" (click)="cargarProcesos()">
+          Recargar
+        </button>
+      </div>
+
+      <div class="tabla-wrapper">
+        <table class="procesos-table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Categoría</th>
+              <th>Estado</th>
+              <th>Org.</th>
+              <th class="th-actions">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (p of procesos; track p.id) {
+              <tr>
+                <td>
+                  <div class="cell-main">
+                    <span class="proc-name">
+                      {{ p.name || 'Sin nombre' }}
+                    </span>
+                    @if (p.id) {
+                      <span class="proc-id">ID {{ p.id }}</span>
+                    }
+                  </div>
+                </td>
+                <td>
+                  {{ p.category || '—' }}
+                </td>
+                <td>
+                  <span
+                    class="status-pill"
+                    [class]="('status-' + (p.status || '').toLowerCase())"
+                  >
+                    {{ p.status || '—' }}
+                  </span>
+                </td>
+                <td>
+                  {{ p.organizationId ?? '—' }}
+                </td>
+                <td class="cell-actions">
+                  <button
+                    type="button"
+                    class="btn-action edit"
+                    (click)="editarProceso(p)"
+                  >
+                    Editar
+                  </button>
+                  <button
+                    type="button"
+                    class="btn-action danger"
+                    (click)="eliminarProceso(p)"
+                  >
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+  }
+
+  <button type="button" class="volver-btn" (click)="volver()">
+    ← Volver a creación de procesos
+  </button>
+</div>

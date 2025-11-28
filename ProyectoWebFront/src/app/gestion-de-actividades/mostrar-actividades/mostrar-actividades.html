@@ -3,9 +3,30 @@
   (dragover)="onDragOver($event)"
   (drop)="onDropOutside($event)"
 >
-  <h2 class="title">Actividades</h2>
+  <header class="board-header">
+    <div class="board-title-group">
+      <div class="board-icon">
+        <span>⧉</span>
+      </div>
+      <div>
+        <h2 class="title">Actividades</h2>
+        <p class="subtitle">
+          Arrastra las tarjetas para reordenar y administra las actividades del proceso.
+        </p>
+      </div>
+    </div>
+  </header>
 
-  <div class="task-list">
+  <!-- Estado vacío -->
+  <div class="empty-state" *ngIf="activities.length === 0">
+    <h3>Sin actividades registradas</h3>
+    <p>
+      Aún no hay actividades configuradas. Crea una actividad para empezar a construir tu flujo.
+    </p>
+  </div>
+
+  <!-- Lista de tarjetas -->
+  <div class="task-list" *ngIf="activities.length > 0">
     @for (act of activities; track act.id; let i = $index) {
       <article
         class="card"
@@ -20,11 +41,13 @@
       >
         <div class="card__row">
           <span class="handle" aria-hidden="true">⋮⋮</span>
-          <h3 class="card__title">{{ act.name || 'Actividad sin nombre' }}</h3>
-      </div>
+          <h3 class="card__title">
+            {{ act.name || 'Actividad sin nombre' }}
+          </h3>
+        </div>
 
         <p class="card__desc">
-          {{ act.description || 'Sin descripción' }}
+          {{ act.description || 'Sin descripción disponible.' }}
         </p>
 
         <div class="meta">
@@ -41,6 +64,7 @@
             <span class="meta__value">{{ act.id }}</span>
           </div>
         </div>
+
         <div class="card-actions">
           <button class="btn-delete" (click)="eliminarActividad(act.id)">
             Eliminar
@@ -48,9 +72,10 @@
         </div>
       </article>
     }
-    
   </div>
+
   <button class="volver-btn" type="button" (click)="cancelar()">
-    <span class="arrow">←</span> Volver
+    <span class="arrow">←</span>
+    Volver
   </button>
 </div>

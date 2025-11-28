@@ -1,60 +1,89 @@
-<div class="login-wrapper">
-  <div class="login-container">
-    <div class="login-card">
-      <div class="card-header">
-        <h1>Bienvenido de nuevo</h1>
-        <p>Inicia sesión para continuar</p>
+<div class="auth-page">
+  <div class="auth-shell">
+    <!-- LADO IZQUIERDO: branding / mensaje -->
+    <section class="auth-brand">
+      <div class="brand-content">
+        <h1 class="brand-title">FlowControl</h1>
+        <p class="brand-subtitle">
+          Administra procesos, actividades y roles desde un solo lugar.
+        </p>
+
+        <ul class="brand-highlights">
+          <li>✓ Visualiza tus procesos de forma ordenada</li>
+          <li>✓ Control de actividades y responsables</li>
+          <li>✓ Diseñado para equipos que escalan</li>
+        </ul>
       </div>
 
-      <!-- Formulario -->
-      <form (ngSubmit)="onSubmit()" #loginForm="ngForm" novalidate>
+      <div class="brand-footer">
+        <p>¿Aún no tienes cuenta?</p>
+        <div class="brand-links">
+          <a routerLink="/crear-usuario">Crear usuario</a>
+          <a routerLink="/registro-de-empresa">Registrar empresa</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- LADO DERECHO: formulario -->
+    <section class="auth-panel">
+      <header class="auth-header">
+        <h2>Inicia sesión</h2>
+        <p>Accede a tu panel para continuar gestionando tus procesos.</p>
+      </header>
+
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm" novalidate class="auth-form">
         <!-- Email -->
-        <div class="input-group">
+        <div class="field">
           <label for="email">Correo electrónico</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            [(ngModel)]="loginDto.email"
-            required
-            placeholder="tu@empresa.com"
-          />
+          <div class="field-control">
+            <span class="field-icon" aria-hidden="true"></span>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              [(ngModel)]="loginDto.email"
+              required
+              placeholder="tu@empresa.com"
+            />
+          </div>
         </div>
 
         <!-- Password -->
-        <div class="input-group">
+        <div class="field">
           <label for="password">Contraseña</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            [(ngModel)]="loginDto.password"
-            required
-            placeholder="Ingresa tu contraseña"
-          />
+          <div class="field-control">
+            <span class="field-icon" aria-hidden="true"></span>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              [(ngModel)]="loginDto.password"
+              required
+              placeholder="Ingresa tu contraseña"
+            />
+          </div>
         </div>
 
         <!-- Mensaje de error -->
-        <div *ngIf="errorMessage" class="error-message" role="alert">
-          {{ errorMessage }}
+        <div *ngIf="errorMessage" class="auth-error" role="alert">
+          <span class="error-icon" aria-hidden="true">!</span>
+          <span>{{ errorMessage }}</span>
         </div>
 
-        <!-- Botón de envío -->
-        <button type="submit" [disabled]="loginForm.invalid">
-          Iniciar sesión
-        </button>
+        <!-- Acciones -->
+        <div class="auth-actions">
+          <button type="submit" [disabled]="loginForm.invalid">
+            Entrar al panel
+          </button>
+        </div>
       </form>
 
-      <div class="card-footer">
-        <p>¿Primera vez aquí? 
-          <a routerLink="/crear-usuario">Registrate</a>
+      <footer class="auth-footer">
+        <p>
+          ¿Olvidaste tu contraseña?
+          <span class="muted-link">Contacta al administrador del sistema.</span>
         </p>
-      </div>
-      <div class="card-footer">
-        <p>¿registrar tu empresa? 
-          <a routerLink="/registro-de-empresa">Registrate como empresa</a>
-        </p>
-      </div>
-    </div>
+      </footer>
+    </section>
   </div>
 </div>

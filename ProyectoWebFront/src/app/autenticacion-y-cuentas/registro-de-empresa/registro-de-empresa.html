@@ -1,53 +1,113 @@
-<!-- registro-empresa.html -->
-<div class="registro-container">
-  <div class="registro-card">
-    <h2>Registro de empresa</h2>
+<div class="org-register-page">
+  <div class="org-register-shell">
+    <!-- LADO IZQUIERDO: branding / contexto -->
+    <section class="org-register-brand">
+      <div class="brand-content">
+        <h1 class="brand-title">Crea tu empresa</h1>
+        <p class="brand-subtitle">
+          Registra la organización que estará asociada a tus usuarios y procesos.
+        </p>
 
-    <form (ngSubmit)="onRegistrarEmpresa()" #empresaForm="ngForm">
-      <div class="input-group">
-        <label for="name">Nombre de la empresa</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          [(ngModel)]="empresaDto.name"
-          required
-          placeholder="Ej: Soluciones Tech S.A."
-        />
+        <ul class="brand-highlights">
+          <li>✓ Identifica tu empresa con nombre y NIT</li>
+          <li>✓ Define un correo oficial de contacto</li>
+          <li>✓ Centraliza la gestión de procesos en un solo lugar</li>
+        </ul>
       </div>
 
-      <div class="input-group">
-        <label for="nit">NIT o Identificador</label>
-        <input
-          type="text"
-          id="nit"
-          name="nit"
-          [(ngModel)]="empresaDto.nit"
-          required
-          placeholder="Ej: 900123456-7"
-        />
+      <div class="brand-footer">
+        <p class="brand-hint">
+          ¿Ya tienes acceso?
+        </p>
+        <a class="brand-login" routerLink="/login">
+          Ir a iniciar sesión
+        </a>
       </div>
+    </section>
 
-      <div class="input-group">
-        <label for="email">Correo de contacto</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          [(ngModel)]="empresaDto.email"
-          required
-          placeholder="contacto@empresa.com"
-        />
-      </div>
+    <!-- LADO DERECHO: formulario -->
+    <section class="org-register-panel">
+      <header class="org-register-header">
+        <h2>Registro de empresa</h2>
+        <p>
+          Completa los datos básicos de tu organización para comenzar a trabajar con la plataforma.
+        </p>
+      </header>
 
-      <button type="submit" [disabled]="empresaForm.invalid">
-        Registrar empresa
-      </button>
+      <form
+        (ngSubmit)="onRegistrarEmpresa()"
+        #empresaForm="ngForm"
+        novalidate
+        class="org-register-form"
+      >
+        <!-- Nombre -->
+        <div class="field">
+          <label for="name">Nombre de la empresa</label>
+          <div class="field-control">
+            <span class="field-icon" aria-hidden="true"></span>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              [(ngModel)]="empresaDto.name"
+              required
+              placeholder="Ej: Soluciones Tech S.A."
+            />
+          </div>
+        </div>
 
-      <p class="login-text">
-        ¿Ya tienes una cuenta?
-        <a routerLink="/login">Inicia sesión aquí</a>
-      </p>
-    </form>
+        <!-- NIT -->
+        <div class="field">
+          <label for="nit">NIT o Identificador</label>
+          <div class="field-control">
+            <span class="field-icon" aria-hidden="true">#</span>
+            <input
+              type="text"
+              id="nit"
+              name="nit"
+              [(ngModel)]="empresaDto.nit"
+              required
+              placeholder="Ej: 900123456-7"
+            />
+          </div>
+        </div>
+
+        <!-- Correo -->
+        <div class="field">
+          <label for="email">Correo de contacto</label>
+          <div class="field-control">
+            <span class="field-icon" aria-hidden="true"></span>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              [(ngModel)]="empresaDto.email"
+              required
+              placeholder="contacto@empresa.com"
+            />
+          </div>
+          <p class="field-hint">
+            Este correo se usará para comunicaciones relacionadas con tus procesos.
+          </p>
+        </div>
+
+        <!-- Botón -->
+        <div class="actions">
+          <button
+            type="submit"
+            [disabled]="empresaForm.invalid"
+          >
+            Registrar empresa
+          </button>
+        </div>
+
+        <footer class="org-register-footer">
+          <p>
+            ¿Ya tienes una cuenta?
+            <a routerLink="/login" class="text-link">Inicia sesión aquí</a>
+          </p>
+        </footer>
+      </form>
+    </section>
   </div>
 </div>

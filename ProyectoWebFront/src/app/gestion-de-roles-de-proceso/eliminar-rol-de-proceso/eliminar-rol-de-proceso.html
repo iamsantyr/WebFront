@@ -1,1 +1,72 @@
-<p>eliminar-rol-de-proceso works!</p>
+<div class="delete-wrapper">
+  <div class="delete-card">
+    <!-- HEADER -->
+    <header class="delete-header">
+      <h1>Eliminar rol de proceso</h1>
+      <p>
+        Revisa la información del rol antes de confirmar su eliminación. 
+        Esta acción no se puede deshacer.
+      </p>
+
+      <!-- ID del rol, solo visible si existe -->
+      <div class="id-pill" [hidden]="roleId === null">
+        ID del rol: <span>#{{ roleId }}</span>
+      </div>
+    </header>
+
+    <!-- CUERPO -->
+    <section class="delete-body">
+      <!-- Estado de carga -->
+      <div class="loading-pill" [hidden]="!loading">
+        Procesando, por favor espera...
+      </div>
+
+      <!-- Mensaje de error -->
+      <div class="alert error" [hidden]="!errorMessage">
+        <span class="icon">!</span>
+        <p>{{ errorMessage }}</p>
+      </div>
+
+      <!-- Mensaje de éxito -->
+      <div class="alert success" [hidden]="!successMessage">
+        <span class="icon">✓</span>
+        <p>{{ successMessage }}</p>
+      </div>
+
+      <!-- RESUMEN DEL ROL -->
+      <div class="role-summary">
+        <h2>{{ nombreRol || 'Rol sin nombre' }}</h2>
+        <p class="role-desc">
+          {{ descripcion || 'Sin descripción disponible para este rol.' }}
+        </p>
+      </div>
+
+      <!-- ADVERTENCIA -->
+      <p class="warning-text">
+        Al confirmar, el rol será eliminado de forma permanente y no podrá
+        ser recuperado. Asegúrate de que ningún proceso crítico dependa de él.
+      </p>
+
+      <!-- BOTONES -->
+      <div class="button-row">
+        <button
+          type="button"
+          class="btn secondary"
+          (click)="cancelar()"
+          [disabled]="loading"
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="button"
+          class="btn danger"
+          (click)="confirmarEliminacion()"
+          [disabled]="loading || !roleId"
+        >
+          {{ loading ? 'Eliminando...' : 'Eliminar rol' }}
+        </button>
+      </div>
+    </section>
+  </div>
+</div>

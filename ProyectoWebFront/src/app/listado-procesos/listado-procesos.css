@@ -1,0 +1,345 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f4f5fb;
+  padding: 2rem 1.5rem;
+  box-sizing: border-box;
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: #111827;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.listado-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+.listado-header {
+  margin-bottom: 1.6rem;
+}
+
+.listado-header h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.listado-header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+/* MENSAJES / ESTADOS */
+.alert {
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.alert.error {
+  background-color: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.alert.error::before {
+  content: "!";
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background-color: #fee2e2;
+  border: 1px solid #fecaca;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.state-text {
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin-bottom: 0.7rem;
+}
+
+.empty {
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px dashed #d1d5db;
+  padding: 0.9rem 1.1rem;
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin-bottom: 1rem;
+}
+
+/* CARD QUE CONTIENE LA TABLA */
+.tabla-card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e2e5f2;
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.12);
+  padding: 1.4rem 1.6rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* barra decorativa lateral */
+.tabla-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.9rem;
+  bottom: 0.9rem;
+  width: 4px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #5b21ff, #06b6d4);
+}
+
+.tabla-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.tabla-title {
+  font-weight: 600;
+  font-size: 0.96rem;
+  color: #111827;
+}
+
+.refresh-btn {
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #374151;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  transition: background-color 0.18s ease, border-color 0.18s ease,
+    transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.refresh-btn:hover {
+  background-color: #eef2ff;
+  border-color: #c7d2fe;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(79, 70, 229, 0.25);
+}
+
+/* TABLA */
+.tabla-wrapper {
+  overflow-x: auto;
+}
+
+.procesos-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.procesos-table thead {
+  background: #f3f4f6;
+}
+
+.procesos-table th,
+.procesos-table td {
+  padding: 0.65rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+.procesos-table th {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b7280;
+}
+
+.procesos-table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+/* Primera columna más ancha */
+.procesos-table td:first-child {
+  min-width: 180px;
+}
+
+/* Celdas de contenido */
+.cell-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.proc-name {
+  font-weight: 600;
+  color: #111827;
+}
+
+.proc-id {
+  font-size: 0.78rem;
+  color: #6b7280;
+}
+
+/* STATUS */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: #e5e7eb;
+  color: #374151;
+}
+
+/* variantes comunes (depende del texto en minúscula) */
+.status-draft {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.status-active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-inactive,
+.status-paused {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-completed {
+  background: #e0f2fe;
+  color: #075985;
+}
+
+/* ACCIONES */
+.th-actions {
+  text-align: right;
+}
+
+.cell-actions {
+  text-align: right;
+}
+
+.btn-action {
+  border-radius: 999px;
+  border: none;
+  padding: 0.38rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-left: 0.4rem;
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    background-color 0.18s ease, color 0.18s ease;
+}
+
+/* Editar */
+.btn-action.edit {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  color: #374151;
+}
+
+.btn-action.edit:hover {
+  background-color: #f3f4f6;
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+}
+
+/* Eliminar */
+.btn-action.danger {
+  background: #ef4444;
+  color: #fef2f2;
+  box-shadow: 0 8px 18px rgba(239, 68, 68, 0.4);
+}
+
+.btn-action.danger:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(220, 38, 38, 0.5);
+}
+
+/* BOTÓN VOLVER */
+.volver-btn {
+  margin-top: 1.8rem;
+  border: none;
+  border-radius: 999px;
+  padding: 0.8rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(135deg, #5b21ff, #06b6d4);
+  color: #f9fafb;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.volver-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 35px rgba(37, 99, 235, 0.45);
+  filter: brightness(1.03);
+}
+
+.volver-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.35);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  :host {
+    padding: 1.8rem 1rem;
+  }
+
+  .tabla-card {
+    padding: 1.4rem 1.2rem;
+  }
+
+  .listado-header h2 {
+    font-size: 1.45rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tabla-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .refresh-btn {
+    align-self: stretch;
+    text-align: center;
+  }
+
+  .volver-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -1,55 +1,140 @@
-<div class="home-container">
-  <!-- LOGO en la esquina superior derecha -->
-  <img src="/assets/logo.png" alt="Logo" class="home-logo" />
-
-  <header class="home-header">
-    <h1>Gestión de Procesos</h1>
-    <p>Selecciona una opción para comenzar</p>
-  </header>
-
-  <div class="card-grid">
-    <!-- PROCESOS -->
-    <div class="entity-card">
-      <h2>Procesos</h2>
-      <p>Administra los flujos de trabajo de tu empresa.</p>
-      <div class="actions">
-        <button (click)="navegarCrearProceso()">Crear</button>
-        <button (click)="navegarConsultarProceso()">Consultar</button>
-        <button (click)="navegarEditarProceso()">Editar</button>
+<div class="home-shell">
+  <!-- LATERAL IZQUIERDO / BRAND + ACCESOS RÁPIDOS -->
+  <aside class="home-sidebar">
+    <div class="brand-block">
+      <div class="brand-mark">GP</div>
+      <div class="brand-text">
+        <h1>Panel principal</h1>
+        <p>Orquesta procesos, actividades y usuarios desde un solo lugar.</p>
       </div>
     </div>
 
-    <!-- ACTIVIDADES -->
-    <div class="entity-card">
-      <h2>Actividades</h2>
-      <p>Gestiona las tareas dentro de cada proceso.</p>
-      <div class="actions">
-        <button (click)="navegarCrearActividad()">Crear</button>
-        <button (click)="navegarMostrarActividades()">Consultar</button>
-        <button (click)="navegarModificarActividad()">Editar</button>
-      </div>
-    </div>
+    <nav class="quick-nav">
+      <p class="nav-label">Accesos rápidos</p>
+      <button class="nav-btn" type="button" (click)="navegarCrearProceso()">
+        + Nuevo proceso
+      </button>
+      <button class="nav-btn" type="button" (click)="navegarCrearActividad()">
+        + Nueva actividad
+      </button>
+      <button class="nav-btn" type="button" (click)="navegarCrearUsuario()">
+        + Nuevo usuario
+      </button>
+      <button class="nav-btn" type="button" (click)="navegarCrearEmpresa()">
+        + Registrar empresa
+      </button>
+    </nav>
+  </aside>
 
-    <!-- USUARIOS -->
-    <div class="entity-card">
-      <h2>Usuarios</h2>
-      <p>Administra los miembros y roles de la empresa.</p>
-      <div class="actions">
-        <button (click)="navegarCrearUsuario()">Crear</button>
-        <button (click)="navegarMostrarUsuarios()">Consultar</button>
-        <button (click)="navegarEditarUsuario()">Modificar Usuario</button>
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="home-main">
+    <header class="home-header">
+      <div class="header-text">
+        <h2>Gestión de procesos</h2>
+        <p>
+          Selecciona un módulo para crear, consultar o mantener la información
+          de tu organización.
+        </p>
       </div>
-    </div>
 
-    <!-- EMPRESAS -->
-    <div class="entity-card">
-      <h2>Empresas</h2>
-      <p>Consulta o gestiona la información de las organizaciones.</p>
-      <div class="actions">
-        <button (click)="navegarCrearEmpresa()">Registrar</button>
-        <button (click)="navegarMostrarEmpresas()">Consultar</button>
-        <button (click)="navegarHome()">Volver al Inicio</button>
+      <!-- “chips” de resumen (estáticos por ahora) -->
+      <div class="header-chips">
+        <span class="chip">Procesos</span>
+        <span class="chip">Actividades</span>
+        <span class="chip">Usuarios</span>
+        <span class="chip">Empresas</span>
       </div>
-    </div>
-  </div>
+    </header>
+
+    <!-- GRID DE MÓDULOS -->
+    <section class="home-grid">
+      <!-- PROCESOS -->
+      <article class="module-card">
+        <div class="module-header">
+          <div class="module-icon procesos">P</div>
+          <div>
+            <h3>Procesos</h3>
+            <p>Define, consulta y ajusta los flujos de trabajo.</p>
+          </div>
+        </div>
+
+        <ul class="module-details">
+          <li>Configura estados como borrador, activo o pausado.</li>
+          <li>Asocia actividades, arcos y gateways.</li>
+        </ul>
+
+        <div class="module-actions">
+          <button type="button" (click)="navegarCrearProceso()">Crear</button>
+          <button type="button" (click)="navegarConsultarProceso()">Consultar</button>
+          <button type="button" (click)="navegarEditarProceso()">Editar</button>
+        </div>
+      </article>
+
+      <!-- ACTIVIDADES -->
+      <article class="module-card">
+        <div class="module-header">
+          <div class="module-icon actividades">A</div>
+          <div>
+            <h3>Actividades</h3>
+            <p>Gestiona cada paso dentro de tus procesos.</p>
+          </div>
+        </div>
+
+        <ul class="module-details">
+          <li>Registra tareas manuales, automáticas o de sistema.</li>
+          <li>Controla su ubicación dentro del diagrama.</li>
+        </ul>
+
+        <div class="module-actions">
+          <button type="button" (click)="navegarCrearActividad()">Crear</button>
+          <button type="button" (click)="navegarMostrarActividades()">Consultar</button>
+          <button type="button" (click)="navegarModificarActividad()">Editar</button>
+        </div>
+      </article>
+
+      <!-- USUARIOS -->
+      <article class="module-card">
+        <div class="module-header">
+          <div class="module-icon usuarios">U</div>
+          <div>
+            <h3>Usuarios</h3>
+            <p>Administra acceso y pertenencia a organizaciones.</p>
+          </div>
+        </div>
+
+        <ul class="module-details">
+          <li>Crea cuentas asociadas a una empresa.</li>
+          <li>Actualiza correos, contraseñas e IDs de organización.</li>
+        </ul>
+
+        <div class="module-actions">
+          <button type="button" (click)="navegarCrearUsuario()">Crear</button>
+          <button type="button" (click)="navegarMostrarUsuarios()">Consultar</button>
+          <button type="button" (click)="navegarEditarUsuario()">Editar</button>
+        </div>
+      </article>
+
+      <!-- EMPRESAS -->
+      <article class="module-card">
+        <div class="module-header">
+          <div class="module-icon empresas">E</div>
+          <div>
+            <h3>Empresas</h3>
+            <p>Centraliza la información de las organizaciones.</p>
+          </div>
+        </div>
+
+        <ul class="module-details">
+          <li>Registra datos de contacto y NIT.</li>
+          <li>Consulta rápidamente todas las organizaciones.</li>
+        </ul>
+
+        <div class="module-actions">
+          <button type="button" (click)="navegarCrearEmpresa()">Registrar</button>
+          <button type="button" (click)="navegarMostrarEmpresas()">Consultar</button>
+          <button type="button" (click)="navegarHome()">Ir al inicio básico</button>
+        </div>
+      </article>
+    </section>
+  </main>
 </div>

@@ -1,64 +1,133 @@
-<div class="registro-container">
-  <div class="registro-card">
-    <h2>Modificar empresa</h2>
+<div class="org-page">
+  <div class="org-shell">
+    <!-- LADO IZQUIERDO: branding / contexto -->
+    <section class="org-brand">
+      <div class="brand-content">
+        <h1 class="brand-title">Actualizar empresa</h1>
+        <p class="brand-subtitle">
+          Mantén la información de tu organización al día para que todos los procesos
+          estén alineados.
+        </p>
 
-    <form (ngSubmit)="onModificarEmpresa()" #empresaForm="ngForm">
-      <div class="input-group">
-        <label for="id">ID de la empresa</label>
-        <input
-          type="number"
-          id="id"
-          name="id"
-          [(ngModel)]="idEmpresa"
-          required
-          placeholder="Ej: 1"
-        />
+        <ul class="brand-highlights">
+          <li>✓ Cambia nombre, NIT y correo de contacto</li>
+          <li>✓ Impacta en reportes y asignación de roles</li>
+          <li>✓ Datos consistentes para todo tu equipo</li>
+        </ul>
       </div>
 
-      <div class="input-group">
-        <label for="name">Nombre de la empresa</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          [(ngModel)]="empresaDto.name"
-          required
-          placeholder="Ej: Tech Solutions S.A."
-        />
+      <div class="brand-footer">
+        <p class="brand-hint">
+          Consejo: verifica el ID antes de guardar los cambios.
+        </p>
+        <button type="button" class="brand-home" routerLink="/home-screen">
+          ← Volver al inicio
+        </button>
       </div>
+    </section>
 
-      <div class="input-group">
-        <label for="nit">NIT</label>
-        <input
-          type="text"
-          id="nit"
-          name="nit"
-          [(ngModel)]="empresaDto.nit"
-          required
-          placeholder="Ej: 900123456-7"
-        />
-      </div>
+    <!-- LADO DERECHO: formulario -->
+    <section class="org-panel">
+      <header class="org-header">
+        <h2>Modificar datos de la empresa</h2>
+        <p>
+          Ingresa el <strong>ID de la empresa</strong> y actualiza los campos que
+          necesites.
+        </p>
+      </header>
 
-      <div class="input-group">
-        <label for="email">Correo electrónico</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          [(ngModel)]="empresaDto.email"
-          required
-          placeholder="empresa@correo.com"
-        />
-      </div>
+      <form
+        (ngSubmit)="onModificarEmpresa()"
+        #empresaForm="ngForm"
+        novalidate
+        class="org-form"
+      >
+        <!-- ID -->
+        <div class="field">
+          <label for="id">ID de la empresa</label>
+          <div class="field-control">
+            <span class="field-icon" aria-hidden="true">#</span>
+            <input
+              type="number"
+              id="id"
+              name="id"
+              [(ngModel)]="idEmpresa"
+              required
+              placeholder="Ej: 1"
+            />
+          </div>
+          <p class="field-hint">
+            Este ID corresponde al registro de la empresa que deseas modificar.
+          </p>
+        </div>
 
-      <button type="submit" [disabled]="empresaForm.invalid || loading">
-        {{ loading ? 'Guardando...' : 'Guardar cambios' }}
-      </button>
+        <!-- Nombre -->
+        <div class="field">
+          <label for="name">Nombre de la empresa</label>
+          <div class="field-control">
+            <span class="field-icon" aria-hidden="true"></span>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              [(ngModel)]="empresaDto.name"
+              required
+              placeholder="Ej: Tech Solutions S.A."
+            />
+          </div>
+        </div>
 
-      <p class="login-text">
-        ¿Deseas volver?
-        <a routerLink="/home-screen">Regresar al inicio</a>
-      </p>
-    </form>
+        <!-- NIT -->
+        <div class="field">
+          <label for="nit">NIT</label>
+          <div class="field-control">
+            <span class="field-icon" aria-hidden="true"></span>
+            <input
+              type="text"
+              id="nit"
+              name="nit"
+              [(ngModel)]="empresaDto.nit"
+              required
+              placeholder="Ej: 900123456-7"
+            />
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="field">
+          <label for="email">Correo de contacto</label>
+          <div class="field-control">
+            <span class="field-icon" aria-hidden="true"></span>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              [(ngModel)]="empresaDto.email"
+              required
+              placeholder="empresa@correo.com"
+            />
+          </div>
+        </div>
+
+        <!-- Acciones -->
+        <div class="org-actions">
+          <button
+            type="submit"
+            [disabled]="empresaForm.invalid || loading"
+          >
+            {{ loading ? 'Guardando cambios...' : 'Guardar cambios' }}
+          </button>
+        </div>
+      </form>
+
+      <footer class="org-footer">
+        <p>
+          ¿Prefieres no continuar?
+          <button type="button" class="text-link" routerLink="/home-screen">
+            Regresar al inicio
+          </button>
+        </p>
+      </footer>
+    </section>
   </div>
 </div>

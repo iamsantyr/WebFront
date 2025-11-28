@@ -1,37 +1,116 @@
-<div class="role-container">
-  <div class="role-card">
-    <h2>Crear Rol de Proceso</h2>
+<div class="auth-shell">
+  <div class="auth-card">
+    <!-- PANEL IZQUIERDO (INFO / BRANDING) -->
+    <section class="auth-panel auth-panel--left">
+      <div class="brand-block">
+        <h1 class="brand-title">FLOWCONTROL</h1>
+        <p class="brand-subtitle">
+          Administra procesos, actividades y roles desde un solo lugar.
+        </p>
 
-    <form (ngSubmit)="onCrearRol()" #rolForm="ngForm">
-      <div class="input-group">
-        <label for="nombreRol">Nombre del rol</label>
-        <input
-          type="text"
-          id="nombreRol"
-          name="nombreRol"
-          [(ngModel)]="nombreRol"
-          required
-          placeholder="Ej: Analista, Supervisor, Auditor"
-        />
+        <ul class="brand-list">
+          <li>Define roles claros para cada proceso.</li>
+          <li>Asigna responsabilidades fácilmente.</li>
+          <li>Escala tu equipo sin perder control.</li>
+        </ul>
       </div>
 
-      <div class="input-group">
-        <label for="descripcion">Descripción</label>
-        <textarea
-          id="descripcion"
-          name="descripcion"
-          [(ngModel)]="descripcion"
-          required
-          placeholder="Describe brevemente las funciones del rol"
-          rows="4"
-        ></textarea>
+      <div class="brand-footer">
+        <p>¿Quieres gestionar procesos?</p>
+        <button type="button" class="ghost-btn" (click)="cancelar()">
+          Volver al panel
+        </button>
+      </div>
+    </section>
+
+    <!-- PANEL DERECHO (FORMULARIO) -->
+    <section class="auth-panel auth-panel--right">
+      <header class="form-header">
+        <h2>Nuevo rol de proceso</h2>
+        <p>
+          Define un rol para organizar mejor quién participa en tus procesos.
+        </p>
+      </header>
+
+      <!-- Pill informativa -->
+      <div class="info-pill">
+        <span class="dot"></span>
+        <span class="text">
+          Los roles pueden reutilizarse en diferentes procesos de la misma organización.
+        </span>
       </div>
 
-      <button type="submit" [disabled]="rolForm.invalid">Crear Rol</button>
+      <!-- Mensajes de estado -->
+      <div class="alert error" *ngIf="errorMessage">
+        <span class="icon">!</span>
+        <p>{{ errorMessage }}</p>
+      </div>
 
-      <p class="note-text">
-        Este rol quedará asociado a la empresa y podrá usarse en múltiples procesos.
-      </p>
-    </form>
+      <div class="alert success" *ngIf="successMessage">
+        <span class="icon">✓</span>
+        <p>{{ successMessage }}</p>
+      </div>
+
+      <form (ngSubmit)="onCrearRol()" #rolForm="ngForm" novalidate class="role-form">
+        <!-- Nombre -->
+        <div class="input-group">
+          <label for="nombreRol">Nombre del rol</label>
+          <input
+            type="text"
+            id="nombreRol"
+            name="nombreRol"
+            [(ngModel)]="nombreRol"
+            required
+            placeholder="Ej: Analista, Supervisor, Auditor"
+          />
+        </div>
+
+        <!-- Descripción -->
+        <div class="input-group">
+          <label for="descripcion">Descripción</label>
+          <textarea
+            id="descripcion"
+            name="descripcion"
+            [(ngModel)]="descripcion"
+            required
+            placeholder="Describe brevemente las funciones del rol"
+            rows="4"
+          ></textarea>
+        </div>
+
+        <!-- Organización (opcional) -->
+        <div class="input-group">
+          <label for="organizacionId">ID de organización (opcional)</label>
+          <input
+            type="number"
+            id="organizacionId"
+            name="organizacionId"
+            [(ngModel)]="organizacionId"
+            min="1"
+            placeholder="Ej: 900123456"
+          />
+          <small>Si lo dejas vacío, el rol quedará sin organización asociada.</small>
+        </div>
+
+        <!-- Acciones -->
+        <div class="button-row">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="cancelar()"
+          >
+            Cancelar
+          </button>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="loading"
+          >
+            {{ loading ? 'Creando rol...' : 'Crear rol' }}
+          </button>
+        </div>
+      </form>
+    </section>
   </div>
 </div>

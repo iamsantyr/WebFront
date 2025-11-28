@@ -1,23 +1,45 @@
-<div class="editar-container">
-  <div class="card">
-    <h2>Modificar Actividad</h2>
-    <p class="subtitle">
-      Actualiza la información de una actividad existente dentro de un proceso.
-    </p>
+<div class="activity-edit-page">
+  <div class="edit-card">
+    <header class="edit-header">
+      <div class="icon-circle">
+        <span>✎</span>
+      </div>
+      <div class="header-text">
+        <h1>Modificar actividad</h1>
+        <p>Actualiza los datos de una actividad existente del proceso.</p>
+      </div>
+    </header>
 
-    <form [formGroup]="form" (ngSubmit)="guardar()" novalidate>
-      <!-- ID de la actividad -->
-      <div class="field">
-        <label for="id">ID de la Actividad</label>
-        <input
-          id="id"
-          type="number"
-          formControlName="id"
-          placeholder="Ej: 1"
-        />
-        <small class="err" *ngIf="c('id').touched && c('id').invalid">
-          Debes ingresar un ID válido para modificar una actividad existente.
-        </small>
+    <form [formGroup]="form" (ngSubmit)="guardar()" novalidate class="edit-form">
+      <!-- Fila: ID + Tipo -->
+      <div class="grid-2">
+        <!-- ID de la actividad -->
+        <div class="field">
+          <label for="id">ID de la Actividad</label>
+          <input
+            id="id"
+            type="number"
+            formControlName="id"
+            placeholder="Ej: 1"
+          />
+          <small class="err" *ngIf="c('id').touched && c('id').invalid">
+            Debes ingresar un ID válido para modificar una actividad existente.
+          </small>
+        </div>
+
+        <!-- Tipo -->
+        <div class="field">
+          <label for="type">Tipo de Actividad</label>
+          <select id="type" formControlName="type">
+            <option value="" disabled selected>Seleccione un tipo</option>
+            <option *ngFor="let t of tipos" [value]="t">
+              {{ t | titlecase }}
+            </option>
+          </select>
+          <small class="err" *ngIf="c('type').touched && c('type').invalid">
+            El tipo es obligatorio.
+          </small>
+        </div>
       </div>
 
       <!-- Nombre -->
@@ -31,20 +53,6 @@
         />
         <small class="err" *ngIf="c('name').touched && c('name').invalid">
           El nombre es obligatorio (mínimo 2 caracteres).
-        </small>
-      </div>
-
-      <!-- Tipo -->
-      <div class="field">
-        <label for="type">Tipo de Actividad</label>
-        <select id="type" formControlName="type">
-          <option value="" disabled selected>Seleccione un tipo</option>
-          <option *ngFor="let t of tipos" [value]="t">
-            {{ t | titlecase }}
-          </option>
-        </select>
-        <small class="err" *ngIf="c('type').touched && c('type').invalid">
-          El tipo es obligatorio.
         </small>
       </div>
 
@@ -79,8 +87,8 @@
 
       <!-- Botones -->
       <div class="actions">
-        <button class="btn guardar-btn" type="submit" [disabled]="loading">
-          {{ loading ? 'Actualizando...' : 'Guardar Cambios' }}
+        <button class="btn guardar-btn" type="submit" [disabled]="loading || form.invalid">
+          {{ loading ? 'Actualizando...' : 'Guardar cambios' }}
         </button>
         <button class="btn cancelar-btn" type="button" (click)="cancelar()">
           Cancelar
